@@ -53,25 +53,25 @@
                       Start creating the best possible user experience for you
                       customers.
                     </p>
-                    <form action="#">
+                    <form (ngSubmit)="onSubmit()">
                       <div class="row">
                         <div class="col-12">
                             <div class="input-style-1">
                               <label>User Name</label>
-                              <input  placeholder="User Name" />
+                              <input  placeholder="User Name" name="userName" [(ngModel)]="registerRequest.userName" />
                             </div>
                           </div>
                         <div class="col-12">
                           <div class="input-style-1">
                             <label>Email</label>
-                            <input type="email" placeholder="Email" />
+                            <input type="email" placeholder="Email" name="email" [(ngModel)]="registerRequest.email" />
                           </div>
                         </div>
                         <!-- end col -->
                         <div class="col-12">
                           <div class="input-style-1">
                             <label>Password</label>
-                            <input type="password" placeholder="Password" />
+                            <input type="password" placeholder="Password" name="password" [(ngModel)]="registerRequest.password"/>
                           </div>
                         </div>
                       
