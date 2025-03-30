@@ -6,7 +6,7 @@ import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-admin-user',
-  imports: [AdminSidebarComponent,UserSidebarComponent,DeliverySidebarComponent],
+  imports: [AdminSidebarComponent],
   templateUrl: './admin-user.component.html',
   styleUrl: './admin-user.component.css'
 })
@@ -26,7 +26,7 @@ export class AdminUserComponent {
 getAllUsers(){
 
   this.userService.getAllUsers().subscribe((data)=>{
-  
+
     console.log(data);
   })
 }
