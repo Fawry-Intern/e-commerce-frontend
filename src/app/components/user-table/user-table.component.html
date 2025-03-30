@@ -1,0 +1,85 @@
+<div class="container-fluid p-4">
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-primary fw-bold">User Management</h3>
+        <div class="d-flex gap-3 align-items-center">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users..."
+              [(ngModel)]="searchQuery"
+              (input)="filterUsers()"
+            />
+          </div>
+          <div class="stats-summary">
+            <span class="badge bg-success me-2">{{ getActiveUsersCount() }} Active</span>
+            <span class="badge bg-danger me-2">{{ getInactiveUsersCount() }} Inactive</span>
+            <span class="badge bg-primary">{{ filteredUsers.length }} Total</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Contact</th>
+              <th>Account Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="avatar-circle">
+                    {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+                  </div>
+                  <div class="ms-3">
+                    <div class="fw-bold">{{ user.firstName }} {{ user.lastName }}</div>
+                    <small class="text-muted">ID: {{ user.id }}</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="contact-info">
+                  <div><i class="fas fa-envelope me-2"></i>{{ user.email }}</div>
+                  
+                </div>
+              </td>
+              <td>
+                <div
+                  class="status-badge"
+                  [ngClass]="{
+                    'status-active': user.isActive === true,
+                    'status-inactive': user.isActive === false
+                  }"
+                  (click)="toggleUserStatus(user)"
+                  *ngIf="getUserId() !== user.id.toString()"
+                >
+                  <i class="fas" [ngClass]="user.isActive ? 'fa-check-circle' : 'fa-times-circle'"></i>
+                  {{ user?.isActive === true ? 'Active' : 'Inactive' }}
+                </div>
+              </td>
+              
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline-primary me-2" (click)="viewUserDetails(user)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user)" *ngIf="getUserId() !== user.id.toString()">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

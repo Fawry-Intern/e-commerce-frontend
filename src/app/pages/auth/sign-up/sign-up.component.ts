@@ -5,16 +5,18 @@ import { Router, RouterLink } from '@angular/router';
 import { RegisterRequest } from '../../../dtos/user/register-request.model';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-sign-up',
   standalone:true,
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink,FormsModule,CommonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
   registerRequest: RegisterRequest = {
-    userName:'',
+    firstName:'',
+    lastName:'',
     email: '',
     password: ''
   };
@@ -39,9 +41,7 @@ export class SignUpComponent {
         console.error('Registration failed:', err);
         if (err.error?.fieldErrors) {
           this.fieldErrors = err.error.fieldErrors;
-        } else {
-          this.fieldErrors['general'] = 'Registration failed. Please try again.';
-        }
+        } 
       }
     });
   }

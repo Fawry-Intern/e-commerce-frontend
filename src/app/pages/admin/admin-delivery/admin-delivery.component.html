@@ -1,1 +1,22 @@
-<p>admin-delivery works!</p>
+<div class="dashboard-layout">
+    <app-admin-sidebar></app-admin-sidebar>
+     <div class="main-content">
+         <div class="admin-dashboard">
+             <div class="dashboard-header">
+                 <div class="header-content">
+                     <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+                     <p class="text-muted">Manage shippings </p>
+                 </div>
+             </div>
+
+ 
+             <div class="users-table-section">
+                 <div class="section-header">
+                     <h2>Shipping Management</h2>
+                 </div>
+                 <app-shipments-table [orders]="shippingDetails"></app-shipments-table>
+             </div>
+         </div>
+     </div>
+ </div>
+   
