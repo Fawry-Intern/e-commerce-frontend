@@ -5,6 +5,7 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AdminDeliveryComponent } from './pages/admin/admin-delivery/admin-delivery.component';
+import { CreateCouponComponent } from './pages/admin/create-coupon/create-coupon.component';
 
 export const routes: Routes = [
     
@@ -15,5 +16,7 @@ export const routes: Routes = [
     {path:'login',component:LoginComponent},
     {path:'sign-up',component:SignUpComponent},
     {path:'reset-password',component:ResetPasswordComponent},
+    {path:'admin/user',component:AdminUserComponent},
+    {path:'coupon', component: CreateCouponComponent},
     {path:'**',redirectTo:'login'}
-];
+]
