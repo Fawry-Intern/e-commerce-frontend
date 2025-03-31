@@ -2,14 +2,15 @@
     <div class="card shadow-lg">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="text-primary fw-bold">Shippiments Management</h3>
+          <h3 class="text-primary fw-bold">Shipments Management</h3>
           <div class="d-flex gap-3 align-items-center">
-            
             <div class="stats-summary">
-              <span class="badge bg-success me-2">{{ getDeliveredOrdersCount() }} Delivered Orders</span>
-              <span class="badge bg-danger me-2">{{ getCancelledOrdersCount()  }} Cancelled Orders</span>
-              <span class="badge bg-info me-2">{{filteredShippings.length-(getCancelledOrdersCount()+ getDeliveredOrdersCount())   }} Holding Orders</span>
-              <span class="badge bg-primary">{{   filteredShippings.length }} Total</span>
+              <span class="badge bg-success me-2">{{ getDeliveredShippingsCount() }} Delivered Orders</span>
+              <span class="badge bg-danger me-2">{{ getCancelledShippingsCount() }} Cancelled Orders</span>
+              <span class="badge bg-info me-2">
+                {{ filteredShippings.length - (getCancelledShippingsCount() + getDeliveredShippingsCount()) }} Holding Shipping
+              </span>
+              <span class="badge bg-primary">{{ filteredShippings.length }} Total</span>
             </div>
           </div>
         </div>
@@ -32,42 +33,41 @@
                       {{ order.deliveryPerson?.name?.charAt(0) }}
                     </div>
                     <div class="ms-3">
-                      <div class="fw-bold">{{ order.deliveryPerson?.name }} </div>
+                      <div class="fw-bold">{{ order.deliveryPerson?.name }}</div>
                       <small class="text-muted">ID: {{ order.orderId }}</small>
                     </div>
                   </div>
                 </td>
                 <td>
-                    <div class="contact-info">
-                        <div><i class="fas fa-envelope me-2"></i>{{ order.deliveryPerson?.email }}</div>
-                        <div><i class="fas fa-phone me-2"></i>{{ order.deliveryPerson?.phoneNumber }}</div>
-                        <div><i class="fas fa-map-marker-alt me-2"></i>{{ order.deliveryPerson?.address }}</div>
-                      </div>
-                  </td>
-                <td>
-                    <div class="contact-info">
-                        <div><i class="fas fa-envelope me-2"></i>{{ order.customerDetails?.email }}</div>
-                        <div><i class="fas fa-phone me-2"></i>{{ order.customerDetails?.phone }}</div>
-                        <div><i class="fas fa-map-marker-alt me-2"></i>{{ order.customerDetails?.address }}</div>
-                      </div>
+                  <div class="contact-info">
+                    <div><i class="fas fa-envelope me-2"></i>{{ order.deliveryPerson?.email }}</div>
+                    <div><i class="fas fa-phone me-2"></i>{{ order.deliveryPerson?.phoneNumber }}</div>
+                    <div><i class="fas fa-map-marker-alt me-2"></i>{{ order.deliveryPerson?.address }}</div>
+                  </div>
                 </td>
                 <td>
-                    <div
-                      class="status-badge"
-                      [ngClass]="{
-                        'status-received': order.status == ShippingStatus.RECEIVED,
-                        'status-processed': order.status == ShippingStatus.PROCESSED,
-                        'status-shipped': order.status == ShippingStatus.SHIPPED,
-                        'status-delivered': order.status == ShippingStatus.DELIVERED,
-                        'status-canceled': order.status == ShippingStatus.CANCELLED
-                      }"
-                      (click)="changeOrderStatus(order)"
-                    >
-                      {{ order.status }}
-                    </div>
+                  <div class="contact-info">
+                    <div><i class="fas fa-envelope me-2"></i>{{ order.customerDetails?.email }}</div>
+                    <div><i class="fas fa-phone me-2"></i>{{ order.customerDetails?.phone }}</div>
+                    <div><i class="fas fa-map-marker-alt me-2"></i>{{ order.customerDetails?.address }}</div>
+                  </div>
                 </td>
-                  
-                
+                <td>
+                  <div
+                    class="status-badge"
+                    [ngClass]="{
+                      'status-received': order.status == ShippingStatus.RECEIVED,
+                      'status-processed': order.status == ShippingStatus.PROCESSED,
+                      'status-shipped': order.status == ShippingStatus.SHIPPED,
+                      'status-delivered': order.status == ShippingStatus.DELIVERED,
+                      'status-canceled': order.status == ShippingStatus.CANCELLED
+                    }"
+                    (click)="selectShipping(order)"
+                    data-bs-toggle="modal" data-bs-target="#formModal2"
+                  >
+                    {{ order.status }}
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -76,3 +76,38 @@
     </div>
   </div>
   
+  <div class="modal fade" id="formModal2" tabindex="-1" aria-labelledby="formModal2Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm"> 
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title" id="formModal2Label">Order Status</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3" *ngIf="selectedShipping?.status === ShippingStatus.RECEIVED">
+                The Order with Id {{ selectedShipping?.orderId }} was <strong>Received</strong>. Has it completed the processing process?
+                <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center" 
+                data-bs-dismiss="modal" (click)="changeShippingStatus(selectedShipping)">
+          <i class="fas fa-save me-2"></i> Change Status
+        </button>  
+            </div>
+              <div class="mb-3" *ngIf="selectedShipping?.status === ShippingStatus.PROCESSED">
+                The Order with Id {{ selectedShipping?.orderId }} has the status <strong>Processed</strong> and is ready for shipping. Do you want to ship this order?
+                <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center" 
+                    data-bs-dismiss="modal" (click)="changeShippingStatus(selectedShipping)">
+              <i class="fas fa-save me-2"></i> Change Status
+            </button>  
+            </div>
+            <div class="mb-3" *ngIf="!selectedShipping || (selectedShipping.status !== ShippingStatus.RECEIVED && selectedShipping.status !== ShippingStatus.PROCESSED)">
+                The Order with Id {{ selectedShipping?.orderId }} was {{ selectedShipping?.status }}.
+              </div>
+  
+            
+       
+        </div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

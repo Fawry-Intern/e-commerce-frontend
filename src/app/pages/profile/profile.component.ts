@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminSidebarComponent } from '../../components/admin-sidebar/admin-sidebar.component';
 import { AdminUserComponent } from '../admin/admin-user/admin-user.component';
+import { PasswordChangeRequest } from '../../dtos/user/password-change-request.model';
 @Component({
   selector: 'app-profile',
   imports: [CommonModule,FormsModule,AdminSidebarComponent,AdminUserComponent ],
@@ -17,7 +18,8 @@ export class ProfileComponent {
 
   userId:Number=0;
   user:UserDetails | undefined;
-  
+
+  passwordChangeRequest: PasswordChangeRequest = { oldPassword: '', newPassword: '' };
   constructor(private route:ActivatedRoute,private userService:UserService)
   {
 
@@ -39,6 +41,19 @@ export class ProfileComponent {
         this.user=response;
       })
   }
+
+  onSaveChanges(){
+
+    
+    this.userService.changeUserPassword(this.passwordChangeRequest).subscribe((data)=>{
+      console.log(data);
+    })
+    this.passwordChangeRequest={
+      oldPassword:'',
+      newPassword:''
+    }
+  }
+
 
 isAdmin():Boolean
 {

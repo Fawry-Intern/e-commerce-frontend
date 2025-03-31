@@ -17,48 +17,51 @@ import { CommonModule } from '@angular/common';
 export class ShipmentsTableComponent {
 
   ShippingStatus = ShippingStatus; 
-  @Input() orders: ShippingDetails[] = [];
+  @Input() shippings: ShippingDetails[] = [];
   filteredShippings: ShippingDetails[] = [];
   
+  selectedShipping: any;
+
   constructor(
     private shippingService: ShippingService,
     private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['orders']) {
-      this.filteredShippings=this.orders;
+    if (changes['shippings']) {
+      console.log(this.filteredShippings+' from shipping table')
+      this.filteredShippings=this.shippings;
     }
   }
 
-  getDeliveredOrdersCount(): number {
-    return this.filteredShippings.filter(order => order.status===ShippingStatus.DELIVERED).length;
+  getDeliveredShippingsCount(): number {
+    return this.filteredShippings.filter(shipping => shipping.status===ShippingStatus.DELIVERED).length;
   }
-  getCancelledOrdersCount(): number {
-    return this.filteredShippings.filter(order => order.status===ShippingStatus.CANCELLED).length;
+  getCancelledShippingsCount(): number {
+    return this.filteredShippings.filter(shipping => shipping.status===ShippingStatus.CANCELLED).length;
   }
 
 
   
-  changeOrderStatus(order: ShippingDetails) {
+  changeShippingStatus(shipping: ShippingDetails) {
 
  
-    if (order.status === ShippingStatus.RECEIVED) {
+    if (shipping.status === ShippingStatus.RECEIVED) {
       console.log('entered received ')
-      this.shippingService.processShipment(order.shipmentId).subscribe({
+      this.shippingService.processShipment(shipping.shipmentId).subscribe({
         next: (response) => {
-          order.status = ShippingStatus.PROCESSED;
+          shipping.status = ShippingStatus.PROCESSED;
         },
         error: (error) => {
           console.error('Error proceeding from received to processed :', error);
         }
       });
-    } else  if (order.status === ShippingStatus.PROCESSED){
+    } else  if (shipping.status === ShippingStatus.PROCESSED){
       console.log('entered processed')
-      this.shippingService.shipShipment(order.shipmentId).subscribe({
+      this.shippingService.shipShipment(shipping.shipmentId).subscribe({
         next: (response) => {
-          order.status=ShippingStatus.SHIPPED;
-          order.deliveryPerson=response.deliveryPerson;
+          shipping.status=ShippingStatus.SHIPPED;
+          shipping.deliveryPerson=response.deliveryPerson;
           console.log(response);
         },
         error: (error) => {
@@ -66,8 +69,15 @@ export class ShipmentsTableComponent {
         }
       });
     }
+
+  
   }
 
+  selectShipping(shipping:any){
+
+    this.selectedShipping = shipping ;
+    console.log(shipping);
+  }
  
 
 }
