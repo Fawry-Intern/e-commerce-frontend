@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CreateCouponRequest } from '../dtos/coupons/create-coupon-request';
 
@@ -7,11 +7,11 @@ import { CreateCouponRequest } from '../dtos/coupons/create-coupon-request';
   providedIn: 'root'
 })
 export class CouponService {
-  private apiUrl = 'http://localhost:5051/api/coupons';
+  private apiUrl = 'http://localhost:1111/api/coupons';
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-    this.updateHeaders();
+   // this.updateHeaders();
   }
 
   private updateHeaders(): void {
@@ -20,14 +20,21 @@ export class CouponService {
         'Content-Type': 'application/json'
     });
     }
+    
     createCoupon(createCouponRequest: CreateCouponRequest): Observable<any> {
-      return this.http
-        .post<{ message: string }>(`${this.apiUrl}/create`, createCouponRequest)
-        .pipe(
-          catchError((error) => {
-            console.error('Coupon creation failed:', error);
-            return throwError(() => new Error('Coupon creation failed. Please try again.'));
-          })
-        );
+      return this.http.post<{ message: string }>(`${this.apiUrl}/create`, createCouponRequest).pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Coupon creation failed:', error);
+    
+          // Extract error message from backend response
+          let errorMessage = 'Coupon creation failed. Please try again.';
+          if (error.error && error.error.message) {
+            errorMessage = error.error.message; // Use the backend error message
+          }
+    
+          return throwError(() => new Error(errorMessage));
+        })
+      );
     }
+    
 }

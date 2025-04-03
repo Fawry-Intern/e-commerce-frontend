@@ -1,8 +1,8 @@
 export interface CreateCouponRequest {
-    code: string;
+    couponCode: string;
     discountType: string;
-    discountAmount: number;
-    expiryDate: string | Date; // ✅ Accepts both string and Date for flexibility
+    discountValue: number;
+    expiryDate: Date; // ✅ Accepts both string and Date for flexibility
     usageLimit: number;
   }
   
