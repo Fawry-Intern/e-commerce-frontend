@@ -16,4 +16,4 @@ export const routes: Routes = [
     {path:'sign-up',component:SignUpComponent},
     {path:'reset-password',component:ResetPasswordComponent},
     {path:'**',redirectTo:'login'}
-];
+]
