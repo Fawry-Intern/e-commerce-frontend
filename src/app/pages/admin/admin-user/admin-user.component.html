@@ -1,1 +1,93 @@
-<app-admin-sidebar></app-admin-sidebar>
+<div class="dashboard-layout">
+   <app-admin-sidebar></app-admin-sidebar>
+    <div class="main-content">
+        <div class="admin-dashboard">
+            <div class="dashboard-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+                    <p class="text-muted">Manage users and system settings</p>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+            
+                <div class="dashboard-card users-overview">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <h2>Users Overview</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon active">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">{{ getActiveUsersCount()  }}</span>
+                                <span class="stat-label">Active Users</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon inactive">
+                                <i class="fas fa-user-slash"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">{{ users.length - getActiveUsersCount() }}</span>
+                                <span class="stat-label">Inactive Users</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon total">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value">{{ users.length }}</span>
+                                <span class="stat-label">Total Users</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="dashboard-card recent-activity">
+                    <div class="card-header">
+                        <i class="fas fa-history"></i>
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item" *ngFor="let activity of recentActivities">
+                            <div class="activity-icon" [ngClass]="activity.type">
+                                <i class="fas" [ngClass]="activity.icon"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">{{ activity.title }}</div>
+                                <div class="activity-time">{{ activity.time | date:'MMM dd, yyyy, h:mm:ss a' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card quick-actions">
+                    <div class="card-header">
+                        <i class="fas fa-bolt"></i>
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="actions-grid">
+                        <button class="action-button" (click)="viewAllUsers()">
+                            <i class="fas fa-users"></i>
+                            <span>View All Users</span>
+                        </button>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="users-table-section">
+                <div class="section-header">
+                    <h2>Users Management</h2>
+                </div>
+                <app-user-table [users]="filteredUsers"></app-user-table>
+            </div>
+        </div>
+    </div>
+</div>
+  

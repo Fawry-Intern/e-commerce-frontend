@@ -1,8 +1,9 @@
-import { UserRole } from "../../enums/user-role.enum";
+import { UserRole } from "../../enums/user-role.model";
 
 export interface UserDetails{
     id:Number,
-    username:String,
+    firstName:String,
+    lastName:String,
     email:String,
     isActive:Boolean,
     role:UserRole
