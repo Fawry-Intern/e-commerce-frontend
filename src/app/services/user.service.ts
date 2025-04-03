@@ -3,6 +3,8 @@ import { environment } from "../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { UserDetails } from "../models/user/user-details.model";
 import { catchError, Observable } from "rxjs";
+import { PasswordChangeRequest } from "../dtos/user/password-change-request.model";
+import { DeliveryPersonCreationDetails } from "../dtos/user/delivery-person-creation-details.model";
 
 @Injectable({
     providedIn:'root'
@@ -62,5 +64,26 @@ export class UserService{
                 throw error;
             })
         );
+    }
+
+
+    changeUserPassword(passwordChangeRequest:PasswordChangeRequest):Observable<Number>
+    {
+        this.updateHeaders();
+
+  return this.httpClient.put<Number>(`${this.apiUrl}/change-password`, passwordChangeRequest, { headers: this.headers }).pipe(
+            catchError((error) => {
+                console.error('Deactivating user failed:', error);
+                throw error;
+            })
+        );
+    }
+
+
+    createDeliveryPerson(deliveryPerson: DeliveryPersonCreationDetails):Observable<Number>{
+
+        this.updateHeaders();
+        console.log('before direct call'+ deliveryPerson);
+        return this.httpClient.post<Number>(`${this.apiUrl}/create-delivery`,deliveryPerson,{headers:this.headers});
     }
 }

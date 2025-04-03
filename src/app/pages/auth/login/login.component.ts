@@ -35,8 +35,15 @@ onSubmit() {
             localStorage.setItem('role', response.role.toLowerCase());
 
             if (response.role.toLowerCase() === 'admin') {
-                this.route.navigate(['/admin/user']);
+                this.route.navigate(['/admin/users']);
             } 
+            else if(response.role.toLowerCase()==='customer')
+            {
+
+            }
+            else{
+              
+            }
         },
         error: (err) => {
             console.error('Login failed:', err);

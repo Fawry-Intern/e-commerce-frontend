@@ -57,22 +57,53 @@
                       <div class="row">
                         <div class="col-12">
                             <div class="input-style-1">
-                              <label>User Name</label>
-                              <input  placeholder="User Name" name="userName" [(ngModel)]="registerRequest.userName" />
+                              <label>First Name</label>
+                              <input  placeholder="First Name" name="firstName" [(ngModel)]="registerRequest.firstName" />
+                              <div *ngIf="fieldErrors?.['firstName']" class="text-danger">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ fieldErrors['firstName'] }}
+                              </div>
                             </div>
+                           
+                          </div>
+                          <div class="col-12">
+                            <div class="input-style-1">
+                              <label>Last Name</label>
+                              <input  placeholder="Last Name" name="lastName" [(ngModel)]="registerRequest.lastName" />
+                              <div *ngIf="fieldErrors?.['lastName']" class="text-danger">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ fieldErrors['lastName'] }}
+                              </div>
+                            </div>
+                           
                           </div>
                         <div class="col-12">
                           <div class="input-style-1">
                             <label>Email</label>
                             <input type="email" placeholder="Email" name="email" [(ngModel)]="registerRequest.email" />
+                            <div *ngIf="fieldErrors?.['email']" class="text-danger">
+                              <i class="fas fa-exclamation-circle"></i>
+                              {{ fieldErrors['email'] }}
+                            </div>
                           </div>
+                          
                         </div>
                         <!-- end col -->
                         <div class="col-12">
                           <div class="input-style-1">
                             <label>Password</label>
                             <input type="password" placeholder="Password" name="password" [(ngModel)]="registerRequest.password"/>
+                            <div *ngIf="fieldErrors?.['password']" class="text-danger">
+                              <i class="fas fa-exclamation-circle"></i>
+                              {{ fieldErrors['password'] }}
+                            </div>
                           </div>
+                          <div *ngIf="fieldErrors?.['general']" class="text-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ fieldErrors['general'] }}
+                          </div>
+                          
+                         
                         </div>
                       
                       

@@ -1,34 +1,31 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidebar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './admin-sidebar.component.html',
   styleUrl: './admin-sidebar.component.css'
 })
 export class AdminSidebarComponent {
+  userId:Number=0;
   constructor(
     private router: Router
   ) {
-   
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      this.userId = parseInt(storedUserId, 10);
+    }
   }
 
-  goToAdminDashboard() {
-    this.router.navigate(['admin-dashboard']);
-  }
+  viewMyProfile() {
 
-  goToProfile() {
-    this.router.navigate(['profile']);
-  }
+      this.router.navigate(['/profile',this.userId]);
+    }
 
-  goToActiveAccounts() {
-    this.router.navigate(['active-account']);
-  }
+  
 
-  goToBlockedAccounts() {
-    this.router.navigate(['un-active-account']);
-  }
+
 
   logout() {
     localStorage.clear();
