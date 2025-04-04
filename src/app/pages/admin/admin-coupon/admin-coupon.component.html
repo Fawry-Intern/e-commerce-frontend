@@ -1,0 +1,125 @@
+<div class="dashboard-layout">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="main-content">
+    <div class="admin-dashboard">
+      <div class="dashboard-header">
+        <div class="header-content">
+          <h1><i class="fas fa-ticket-alt"></i> Coupons Dashboard</h1>
+          <p class="text-muted">Manage discount coupons</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Coupons Overview -->
+        <div class="dashboard-card coupons-overview">
+          <div class="card-header">
+            <i class="fas fa-tags"></i>
+            <h2>Coupons Overview</h2>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon active">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value">{{ getActiveCouponsCount() }}</span>
+                <span class="stat-label">Active Coupons</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon expired">
+                <i class="fas fa-times-circle"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value">{{ coupons.length - getActiveCouponsCount() }}</span>
+                <span class="stat-label">Expired Coupons</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon total">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value">{{ coupons.length }}</span>
+                <span class="stat-label">Total Coupons</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card quick-actions">
+          <div class="card-header">
+            <i class="fas fa-bolt"></i>
+            <h2>Quick Actions</h2>
+          </div>
+          <div class="actions-grid">
+            <button class="action-button" (click)="createCoupon()">
+              <i class="fas fa-plus"></i>
+              <span>Create Coupon</span>
+            </button>
+            <button class="action-button" (click)="viewAllCoupons()">
+              <i class="fas fa-ticket-alt"></i>
+              <span>View All Coupons</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coupon Form Section -->
+      <div class="create-coupon-section">
+        <div class="section-header">
+          <h2>Create New Coupon</h2>
+        </div>
+        <div class="container d-flex justify-content-center">
+          <div class="card p-4 shadow-sm w-50">
+            <h4 class="text-center">Create Coupon</h4>
+            <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="couponCode" class="form-label">Coupon Code</label>
+                <input type="text" id="couponCode" class="form-control" formControlName="couponCode">
+              </div>
+
+              <div class="mb-3">
+                <label for="usageLimit" class="form-label">Usage Limit</label>
+                <input type="number" id="usageLimit" class="form-control" formControlName="usageLimit">
+              </div>
+
+              <div class="mb-3">
+                <label for="expiryDate" class="form-label">Expiry Date</label>
+                <input type="date" id="expiryDate" class="form-control" formControlName="expiryDate">
+              </div>
+
+              <div class="mb-3">
+                <label for="discountType" class="form-label">Discount Type</label>
+                <select id="discountType" class="form-select" formControlName="discountType">
+                  <option *ngFor="let type of discountTypes" [value]="type">{{ type }}</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="discountValue" class="form-label">Discount Value</label>
+                <input type="number" id="discountValue" class="form-control" formControlName="discountValue">
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coupons Table Section -->
+      <div class="coupons-table-section">
+        <div class="section-header">
+          <h2>All Coupons</h2>
+        </div>
+        <app-coupon-table [coupons]="filteredCoupons"></app-coupon-table> <!-- This is where the coupon table component is included -->
+      </div>
+    </div>
+  </div>
+</div>

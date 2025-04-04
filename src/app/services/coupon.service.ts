@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CreateCouponRequest } from '../dtos/coupons/create-coupon-request';
-
+import { Coupon } from '../models/coupon/coupon.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class CouponService {
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-   // this.updateHeaders();
+   this.updateHeaders();
   }
 
   private updateHeaders(): void {
@@ -22,7 +22,8 @@ export class CouponService {
     }
     
     createCoupon(createCouponRequest: CreateCouponRequest): Observable<any> {
-      return this.http.post<{ message: string }>(`${this.apiUrl}/create`, createCouponRequest).pipe(
+      this.updateHeaders();
+      return this.http.post<{ message: string }>(`${this.apiUrl}/create`,createCouponRequest,{headers: this.headers}).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('Coupon creation failed:', error);
     
@@ -36,5 +37,45 @@ export class CouponService {
         })
       );
     }
-    
+
+    getAllCoupons(): Observable<Coupon[]> {
+                this.updateHeaders();
+                return this.http.get<Coupon[]>(`${this.apiUrl}`, { headers: this.headers }).pipe(
+                    catchError((error) => {
+                        console.error('Getting all users failed:', error);
+                        throw error;
+                    })
+                );
+    }
+
+    activateCoupon(couponCode: String): Observable<void> {
+        this.updateHeaders();
+        return this.http.put<void>(`${this.apiUrl}/${couponCode}/activate`, {}, { headers: this.headers }).pipe(
+            catchError((error) => {
+                console.error('Activating coupon failed:', error);
+                throw error;
+            })
+        );
+    }
+
+    deactivateCoupon(couponCode: String): Observable<void> {
+        this.updateHeaders();
+        return this.http.put<void>(`${this.apiUrl}/${couponCode}/deactivate`, {}, { headers: this.headers }).pipe(
+            catchError((error) => {
+                console.error('Deactivating coupon failed:', error);
+                throw error;
+            })
+        );
+    }
+
+    deleteCoupon(couponCode: String): Observable<void> {
+        this.updateHeaders();
+        return this.http.delete<void>(`${this.apiUrl}/${couponCode}`, { headers: this.headers }).pipe(
+            catchError((error) => {
+                console.error('Deleting coupon failed:', error);
+                throw error;
+            })
+        );
+    }
+
 }

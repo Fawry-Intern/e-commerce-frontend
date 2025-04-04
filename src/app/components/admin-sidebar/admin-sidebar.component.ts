@@ -23,8 +23,9 @@ export class AdminSidebarComponent {
       this.router.navigate(['/profile',this.userId]);
     }
 
-  
-
+  viewcoupon() {
+    this.router.navigate(['/admin/coupon']);
+  }
 
 
   logout() {
