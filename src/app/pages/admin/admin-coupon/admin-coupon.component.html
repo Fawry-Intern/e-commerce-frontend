@@ -55,7 +55,7 @@
           </div>
           <div class="actions-grid">
             <button class="action-button" (click)="createCoupon()">
-              <i class="fas fa-plus"></i>
+              <i class="fas fa-bolt"></i>
               <span>Create Coupon</span>
             </button>
             <button class="action-button" (click)="viewAllCoupons()">
@@ -67,7 +67,7 @@
       </div>
 
       <!-- Coupon Form Section -->
-      <div class="create-coupon-section">
+      <div class="create-coupon-section mt-5">
         <div class="section-header">
           <h2>Create New Coupon</h2>
         </div>
@@ -114,11 +114,11 @@
       </div>
 
       <!-- Coupons Table Section -->
-      <div class="coupons-table-section">
+      <div class="coupons-table-section mt-5">
         <div class="section-header">
           <h2>All Coupons</h2>
         </div>
-        <app-coupon-table [coupons]="filteredCoupons"></app-coupon-table> <!-- This is where the coupon table component is included -->
+        <app-coupon-table [coupons]="filteredCoupons"></app-coupon-table>
       </div>
     </div>
   </div>

@@ -264,7 +264,6 @@
     white-space: nowrap;
 }
 
-/* Users Management Section */
 .coupons-table-section {
     background: white;
     border-radius: 20px;
@@ -273,6 +272,16 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.coupons-counsumptions-table {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 
 .section-header {
     display: flex;

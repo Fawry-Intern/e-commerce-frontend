@@ -7,11 +7,12 @@ import { CreateCouponRequest } from '../../../dtos/coupons/create-coupon-request
 import { Router } from '@angular/router';
 import { Coupon } from '../../../models/coupon/coupon.model';
 import { CouponTableComponent } from '../../../components/coupon-table/coupon-table.component';
+import { ConsumedCouponsTableComponent } from '../consumed-coupons-table/consumed-coupons-table.component';
 
 @Component({
   selector: 'app-admin-coupon',
   standalone: true, 
-  imports: [AdminSidebarComponent, CouponTableComponent, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [ConsumedCouponsTableComponent,AdminSidebarComponent, CouponTableComponent, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './admin-coupon.component.html',
   styleUrls: ['./admin-coupon.component.css']
 })
@@ -103,6 +104,13 @@ export class AdminCouponComponent implements OnInit {
 
   viewAllCoupons(): void {
     const couponsSection = document.querySelector('.coupons-table-section');
+    if (couponsSection) {
+      couponsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  viewAllCouponConsumptions(): void {
+    const couponsSection = document.querySelector('.coupons-counsumptions-table');
     if (couponsSection) {
       couponsSection.scrollIntoView({ behavior: 'smooth' });
     }

@@ -3,11 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, Observable, throwError } from 'rxjs';
 import { CreateCouponRequest } from '../dtos/coupons/create-coupon-request';
 import { Coupon } from '../models/coupon/coupon.model';
+import { ConsumedCoupon } from '../models/coupon/consumption.model';
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
   private apiUrl = 'http://localhost:1111/api/coupons';
+  private consumptionUrl = 'http://localhost:1111/api/consumptions';
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -73,6 +75,16 @@ export class CouponService {
         return this.http.delete<void>(`${this.apiUrl}/${couponCode}`, { headers: this.headers }).pipe(
             catchError((error) => {
                 console.error('Deleting coupon failed:', error);
+                throw error;
+            })
+        );
+    }
+
+    getAllConsumedCoupons(): Observable<ConsumedCoupon[]> {
+        this.updateHeaders();
+        return this.http.get<ConsumedCoupon[]>(`${this.consumptionUrl}`, { headers: this.headers }).pipe(
+            catchError((error) => {
+                console.error('Getting all consumed coupons failed:', error);
                 throw error;
             })
         );

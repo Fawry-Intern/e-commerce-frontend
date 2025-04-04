@@ -27,6 +27,10 @@ export class AdminSidebarComponent {
     this.router.navigate(['/admin/coupon']);
   }
 
+  viewcouponConsumptions() {
+    this.router.navigate(['/admin/coupon-consumptions']);
+  }
+
 
   logout() {
     localStorage.clear();
