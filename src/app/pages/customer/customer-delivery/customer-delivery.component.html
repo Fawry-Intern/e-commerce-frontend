@@ -1,1 +1,89 @@
-<p>customer-delivery works!</p>
+<div class="dashboard-layout">
+    <app-customer-sidebar></app-customer-sidebar>
+    <div class="main-content">
+      <div class="dashboard-card users-overview">
+        <div class="card-header">
+          <i class="fas fa-users"></i>
+          <h2>Order Tracking Dashboard</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon inactive">
+              <i class="fas fa-user-slash"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value">{{ shipmentTracking.status }}</span>
+              <span class="stat-label">Current Status</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value">{{ shipmentTracking.deliveryPersonName || 'N/A' }}</span>
+              <span class="stat-label">Delivery Person</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-calendar"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value">{{ shipmentTracking.expectedDeliveryDate | date: 'shortDate' }}</span>
+              <span class="stat-label">Expected Delivery</span>
+            </div>
+          </div>
+        </div>
+  
+ 
+        <div class="order-tracker d-flex justify-content-between align-items-center my-4">
+          <div *ngFor="let step of steps; let i = index" 
+               class="step" 
+               [ngClass]="{
+                  'completed': i <= currentStepIndex,
+                  'upcoming': i > currentStepIndex,
+                  'canceled': shipmentTracking.status === ShippingStatus.CANCELLED
+                }">
+            <div class="circle">{{ i + 1 }}</div>
+            <div class="label">{{ step }}</div>
+          </div>
+        </div>
+  
+        <div class="d-flex justify-content-center">
+          <button *ngIf="currentStepIndex < 2" class="btn btn-danger w-50" >Cancel Shipment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formModal3" tabindex="-1" aria-labelledby="formModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content bg-white text-dark rounded shadow">
+        
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title" id="formModal3Label">Order Cancellation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          
+            <div class="mb-3">
+             Do you want to cancel delivery?
+            </div>
+  
+            <div class="d-flex justify-content-center mt-4">
+              <button type="button" class="btn btn-success w-100" (click)="cancelShipment()" data-bs-dismiss="modal">
+                <i class="fas fa-check-circle me-2"></i> Cancel Delivery
+              </button>
+            </div>
+         
+        </div>
+  
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

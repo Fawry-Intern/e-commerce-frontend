@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminSidebarComponent } from '../../../components/admin-sidebar/admin-sidebar.component';
-import { UserSidebarComponent } from '../../../components/user-sidebar/user-sidebar.component';
-import { DeliverySidebarComponent } from '../../../components/delivery-sidebar/delivery-sidebar.component';
+
 import { UserService } from '../../../services/user.service';
 import { UserDetails } from '../../../models/user/user-details.model';
 import { UserTableComponent } from '../../../components/user-table/user-table.component';
