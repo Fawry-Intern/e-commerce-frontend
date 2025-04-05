@@ -2,5 +2,6 @@
 export interface AuthDetails{
     accessToken:string,
     userId:Number,
-    role:String
+    role:String,
+    email:String
 }
