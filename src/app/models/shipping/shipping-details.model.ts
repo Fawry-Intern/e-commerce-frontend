@@ -9,6 +9,8 @@ export interface ShippingDetails{
     orderId:Number,
     customerDetails:CustomerDetails,
     deliveryPerson:DeliveryPersonDetails|null,
-    status:ShippingStatus
+    status:ShippingStatus,
+    deliveredAt:Date,
+    expectedDeliveryDate:Date
     
 }

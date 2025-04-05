@@ -510,7 +510,7 @@ table{
   gap: 1rem;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -574,4 +574,7 @@ table{
     border-radius: 5px;
     font-weight: bold;
   }
-  
+  .load-more-btn {
+    display: block;
+    margin: 0 auto;
+  }

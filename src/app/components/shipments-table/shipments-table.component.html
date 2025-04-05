@@ -23,6 +23,8 @@
                 <th>Delivery Contacts</th>
                 <th>Customer Contacts</th>
                 <th>Order Status</th>
+                <th>Delivered At</th>
+                <th>Expected Delivery Date</th>
               </tr>
             </thead>
             <tbody>
@@ -68,8 +70,21 @@
                     {{ order.status }}
                   </div>
                 </td>
+                <td>
+                 <div class="content-info">
+                           {{order.deliveredAt}}
+                 </div>
+                </td>
+                <td>
+                  <div class="content-info">
+                        {{order.expectedDeliveryDate}}
+                  </div>
+
+                </td>
               </tr>
             </tbody>
+            
+            
           </table>
         </div>
       </div>

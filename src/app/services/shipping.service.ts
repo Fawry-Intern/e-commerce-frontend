@@ -3,6 +3,7 @@ import { environment } from "../../environments/environment";
 import { ShippingDetails } from "../models/shipping/shipping-details.model";
 import { catchError, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
+import { Page } from "../models/page.model";
 
 @Injectable({
     providedIn:'root'
@@ -25,15 +26,20 @@ export class ShippingService{
         });
     }
 
-        getAllShipments(): Observable<ShippingDetails[]> {
-            this.updateHeaders();
-            return this.httpClient.get<ShippingDetails[]>(`${this.apiUrl}`, { headers: this.headers }).pipe(
-                catchError((error) => {
-                    console.error('Getting all shipments failed:', error);
-                    throw error;
-                })
-            );
-        }
+    getAllShipments(page: number , size: number , sortBy: string = 'shipmentId'): Observable<Page<ShippingDetails>> {
+        this.updateHeaders();
+       console.log(page);
+        return this.httpClient.get<Page<ShippingDetails>>(
+          `${this.apiUrl}?page=${page}&size=${size}&sortBy=${sortBy}`,
+          { headers: this.headers }
+        ).pipe(
+          catchError((error) => {
+            console.error('Getting all shipments failed:', error);
+            throw error;
+          })
+        );
+      }
+      
 
         processShipment(shipmentId:Number):Observable<ShippingDetails>{
 

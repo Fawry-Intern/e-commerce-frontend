@@ -1,33 +1,41 @@
 <div class="dashboard-layout">
-    <app-admin-sidebar></app-admin-sidebar>
-     <div class="main-content">
-         <div class="admin-dashboard">
-             <div class="dashboard-header">
-                 <div class="header-content">
-                     <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
-                     <p class="text-muted">Manage shippings </p>
-                 </div>
-             </div>
-             <div class="d-flex justify-content-end mb-3">
-                <button class="btn btn-primary fw-bold edit-profile d-flex align-items-center gap-2"
-                    data-bs-toggle="modal" data-bs-target="#formModal3">
-                    <i class="fas fa-key"></i> Add Delivery Person
-                </button>
-            </div>
-            
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="main-content">
+      <div class="admin-dashboard">
+          <div class="dashboard-header">
+              <div class="header-content">
+                  <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+                  <p class="text-muted">Manage shippings </p>
+              </div>
+          </div>
+          <div class="d-flex justify-content-end mb-3">
+              <button class="btn btn-primary fw-bold edit-profile d-flex align-items-center gap-2"
+                      data-bs-toggle="modal" data-bs-target="#formModal3">
+                  <i class="fas fa-key"></i> Add Delivery Person
+              </button>
+          </div>
 
- 
-             <div class="users-table-section">
-                 <div class="section-header">
-                     <h2>Shipping Management</h2>
-                 </div>
-                 <app-shipments-table [shippings]="shippingDetails"></app-shipments-table>
-             </div>
-         </div>
-     </div>
- </div>
-   
- <div class="modal fade" id="formModal3" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+          <div class="users-table-section">
+              <div class="section-header">
+                  <h2>Shipping Management</h2>
+              </div>
+              <app-shipments-table [shippings]="shippingDetails"></app-shipments-table>
+              <div class="d-flex justify-content-center">
+                <div  style="text-align: center;">
+                    <button class="btn btn-danger fw-bold edit-profile d-flex align-items-center gap-2 load-more-btn w-100"
+                    (click)="loadShipments()"
+                    >
+                        Load More
+                    </button>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for Adding Delivery Person -->
+<div class="modal fade" id="formModal3" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content bg-light text-dark">
         <div class="modal-header border-secondary">
@@ -35,7 +43,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form >
+          <form>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName" class="form-label">First Name</label>
@@ -85,12 +93,7 @@
                   </div>
               </div>
           </div>
-          
-            
-              
-            
-              
-  
+
             <div class="d-flex justify-content-center">
               <button type="button" class="btn btn-success w-50 me-2" (click)="createDeliveryPerson()">
                 <i class="fas fa-save me-2"></i> Save
@@ -102,6 +105,3 @@
       </div>
     </div>
   </div>
-  
-
-  
