@@ -1,0 +1,86 @@
+<div class="container-fluid p-4">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-primary fw-bold">Coupon Management</h3>
+          <div class="d-flex gap-3 align-items-center">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search coupons..."
+                [(ngModel)]="searchQuery"
+                (input)="filterCoupons()"
+              />
+            </div>
+            <div class="stats-summary">
+              <span class="badge bg-success me-2">{{ getActiveCouponsCount() }} Active</span>
+              <span class="badge bg-danger me-2">{{ getExpiredCouponsCount() }} Expired</span>
+              <span class="badge bg-primary">{{ filteredCoupons.length }} Total</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Coupon Code</th>
+                <th>Discount Type</th>
+                <th>Discount Value</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let coupon of filteredCoupons">
+                <td>
+                  <div class="coupon-code">
+                    {{ coupon.couponCode }}
+                  </div>
+                </td>
+                <td>
+                  <div class="discount-type">
+                    {{ coupon.discountType }}
+                  </div>
+                </td>
+                <td>
+                  <div class="discount-value">
+                    <ng-container *ngIf="coupon.discountType === 'PERCENTAGE'; else fixedAmount">
+                      {{ coupon.discountValue }}%
+                    </ng-container>
+                    <ng-template #fixedAmount>
+                      {{ coupon.discountValue | currency}}
+                    </ng-template>
+                  </div>                  
+                </td>
+                <td>
+                  <div
+                    class="status-badge"
+                    [ngClass]="{
+                      'status-active': coupon.isActive === true,
+                      'status-inactive': coupon.isActive === false
+                    }"
+                    (click)="toggleCouponStatus(coupon)"
+                    *ngIf="getCouponId() !== coupon.id.toString()"
+                  >
+                    <i class="fas" [ngClass]="coupon.isActive ? 'fa-check-circle' : 'fa-times-circle'"></i>
+                    {{ coupon?.isActive === true ? 'Active' : 'Inactive' }}
+                  </div>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteCoupon(coupon)" *ngIf="getCouponId() !== coupon.id.toString()">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
