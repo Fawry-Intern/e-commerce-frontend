@@ -124,9 +124,7 @@ button {
     cursor: pointer;
 }
 
-.logout-link:hover {
-    background-color: #bb2d87;
-}
+
 
 .logout-link i {
     margin-right: 10px;
@@ -159,7 +157,7 @@ button {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .sidebar {
         width: 70px;
@@ -197,7 +195,7 @@ button {
     display: none;
     list-style: none;
     padding: 0;
-    background-color: #2c3e50; /* Matching sidebar color */
+    background-color: #2c3e50;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -220,6 +218,6 @@ button {
 }
 
 .dropdown-menu li a:hover {
-    background-color: #0b121a; /* Darker shade for hover effect */
+    background-color: #0b121a; 
     padding-left: 45px;
 }

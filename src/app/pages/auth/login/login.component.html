@@ -52,20 +52,30 @@
                     Start creating the best possible user experience for you
                     customers.
                   </p>
-                  <form action="#">
+                  <form (ngSubmit)="onSubmit()">
                     <div class="row">
                       <div class="col-12">
                         <div class="input-style-1">
                           <label>Email</label>
-                          <input type="email" placeholder="Email" />
+                          <input type="email" placeholder="Email" name="email" [(ngModel)]="authRequest.email"/>
                         </div>
                       </div>
                       <!-- end col -->
                       <div class="col-12">
                         <div class="input-style-1">
                           <label>Password</label>
-                          <input type="password" placeholder="Password" />
+                          <input type="password" placeholder="Password" name="password" [(ngModel)]="authRequest.password"/>
+                          <div *ngIf="fieldErrors?.['password']" class="text-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ fieldErrors['password'] }}
+                          </div>
                         </div>
+                        <div *ngIf="fieldErrors?.['general']" class="text-danger">
+                          <i class="fas fa-exclamation-circle"></i>
+                          {{ fieldErrors['general'] }}
+                        </div>
+                        
+                    
                       </div>
                     
                   

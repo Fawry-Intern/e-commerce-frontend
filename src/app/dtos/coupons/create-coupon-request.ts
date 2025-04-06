@@ -1,7 +1,8 @@
-export interface CreateCouponRequest{
-    code: string;
+export interface CreateCouponRequest {
+    couponCode: string;
     discountType: string;
-    discountAmount: number;
-    expiryDate: Date;
+    discountValue: number;
+    expiryDate: Date; // ✅ Accepts both string and Date for flexibility
     usageLimit: number;
-}
+  }
+  
