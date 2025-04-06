@@ -8,6 +8,18 @@ import { UserService } from '../../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+interface Page<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+  last: boolean;
+  first: boolean;
+  numberOfElements: number;
+  empty: boolean;
+}
+
 @Component({
   selector: 'app-admin-delivery',
   standalone: true,
@@ -19,6 +31,10 @@ export class AdminDeliveryComponent implements OnInit {
   shippingDetails: ShippingDetails[] = [];
   deliveryPerson: DeliveryPersonCreationDetails = this.getEmptyDeliveryPerson();
 
+  currentPage = -1;
+  totalPages = 0;
+  pageSize = 10;
+
   workDaysMap = new Map<number, string>([
     [0, 'Sunday'],
     [1, 'Monday'],
@@ -29,7 +45,7 @@ export class AdminDeliveryComponent implements OnInit {
     [6, 'Saturday']
   ]);
 
-  workDaysArray = Array.from(this.workDaysMap.entries()); // ✅ Convert to array
+  workDaysArray = Array.from(this.workDaysMap.entries());
 
   constructor(private shippingService: ShippingService, private userService: UserService) {}
 
@@ -51,23 +67,35 @@ export class AdminDeliveryComponent implements OnInit {
   }
 
   loadShipments(): void {
-    this.shippingService.getAllShipments().subscribe({
-      next: (data) => {
-        this.shippingDetails = data;
-        console.log('Shipments loaded:', data);
+    this.nextPage()
+    this.shippingService.getAllShipments(this.currentPage, this.pageSize).subscribe({
+      next: (res) => {
+        this.shippingDetails = [...this.shippingDetails, ...res.content];
+        this.totalPages = res.totalPages;
+        this.currentPage = res.number;
+        console.log('Shipments loaded:', res);
       },
       error: (err) => console.error('Error loading shipments:', err)
     });
   }
 
+  nextPage(): Number {
+   
+      this.currentPage++;
+      return this.currentPage ;
+    
+  }
+
+
+
   createDeliveryPerson(): void {
     console.log('Creating Delivery Person:', this.deliveryPerson);
-    
+
     this.userService.createDeliveryPerson(this.deliveryPerson).subscribe({
       next: (data) => {
         console.log('Delivery person created:', data);
         alert('Delivery person added successfully!');
-        this.deliveryPerson = this.getEmptyDeliveryPerson(); // ✅ Reset form
+        this.deliveryPerson = this.getEmptyDeliveryPerson();
       },
       error: (err) => console.error('Error creating delivery person:', err)
     });

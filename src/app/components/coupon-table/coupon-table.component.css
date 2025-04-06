@@ -219,6 +219,17 @@ table{
   font-size: 1.1rem;
 }
 
+.status-active {
+  background: linear-gradient(45deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.status-inactive {
+  background: linear-gradient(45deg, #ffebee, #ffcdd2);
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
 
 /* Enhanced Action Buttons */
 .action-buttons .btn {
@@ -510,7 +521,7 @@ table{
   gap: 1rem;
 }
 
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -531,50 +542,7 @@ table{
     flex-direction: column;
   }
 
-  .users-table-section {
+  .coupons-table-section {
     padding: 1.5rem;
   }
 }
-.status-received {
-    background-color: lightblue;
-    color: navy;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .status-processed {
-    background-color: darkblue;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .status-shipped {
-    background-color: orange;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .status-delivered {
-    background-color: green;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .status-canceled {
-    background-color: red;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  .load-more-btn {
-    display: block;
-    margin: 0 auto;
-  }

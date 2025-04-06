@@ -1,60 +1,4 @@
-.order-tracker {
-    position: relative;
-    padding: 0 10px;
-  }
-  
-  .step {
-    flex: 1;
-    text-align: center;
-    position: relative;
-  }
-  
-  .circle {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    background-color: #ccc;
-    color: #fff;
-    margin: auto;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  .label {
-    margin-top: 5px;
-    font-size: 0.85rem;
-  }
-  
-  .step.completed .circle {
-    background-color: #28a745;
-  }
-  
-  .step.completed .label {
-    color: #28a745;
-  }
-  
-  .step.upcoming .circle {
-    background-color: #ccc;
-  }
-  
-  .step::after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    height: 2px;
-    width: 100%;
-    background-color: #ccc;
-    z-index: -1;
-  }
-  
-  .step:last-child::after {
-    display: none;
-  }
-  
-  
-  
+
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
@@ -159,12 +103,7 @@
 }
 
 /* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-}
-
+/* Ensure the container uses flexbox for proper alignment */
 .stat-item {
     display: flex;
     align-items: center;
@@ -172,40 +111,46 @@
     background: #f8f9fa;
     border-radius: 12px;
     transition: all 0.3s ease;
+    gap: 0.8rem; /* Adjust spacing between icon and text */
 }
 
-.stat-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
+/* Icon Styling */
 .stat-icon {
     width: 45px;
     height: 45px;
-    border-radius: 12px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent resizing */
 }
 
+/* Active Coupons */
 .stat-icon.active {
     background: linear-gradient(45deg, #2ecc71, #27ae60);
+    border: 2px solid #27ae60;
 }
 
-.stat-icon.inactive {
+/* Expired Coupons */
+.stat-icon.expired {
     background: linear-gradient(45deg, #e74c3c, #c0392b);
+    border: 2px solid #c0392b;
 }
 
+/* Total Coupons */
 .stat-icon.total {
     background: linear-gradient(45deg, #3498db, #2980b9);
+    border: 2px solid #2980b9;
 }
 
+/* Ensure text alignment */
 .stat-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .stat-value {
@@ -215,9 +160,10 @@
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #6c757d;
 }
+
 
 /* Activity List */
 .activity-list {
@@ -318,8 +264,7 @@
     white-space: nowrap;
 }
 
-/* Users Management Section */
-.users-table-section {
+.coupons-table-section {
     background: white;
     border-radius: 20px;
     padding: 2rem;
@@ -327,6 +272,16 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.coupons-counsumptions-table {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 
 .section-header {
     display: flex;
@@ -461,19 +416,3 @@
     height: 100%;
     align-content: center;
 }
-
-  
-  .step.canceled .circle {
-    background-color: #ff4d4d; 
-    color: white;
-    border: 2px solid #d60000;
-  }
-  
-  .step.canceled .label {
-    color: #d60000;
-  }
-  
-  .step.canceled i {
-    color: #d60000;
-  }
-  

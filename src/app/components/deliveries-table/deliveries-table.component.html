@@ -1,0 +1,104 @@
+<div class="container-fluid p-4">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-primary fw-bold">Shipments Management</h3>
+          <div class="d-flex gap-3 align-items-center">
+            <div class="stats-summary">
+             
+              <span class="badge bg-primary">{{ filteredShippings.length }} Waiting</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Order</th>
+
+                <th>Customer Contacts</th>
+                <th>Order Status</th>
+          
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of filteredShippings">
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="avatar-circle">
+                      {{ order.customerDetails?.name?.charAt(0) }}
+                    </div>
+                    <div class="ms-3">
+                      <div class="fw-bold">{{ order.customerDetails?.name }}</div>
+                      <small class="text-muted">ID: {{ order.orderId }}</small>
+                    </div>
+                  </div>
+                </td>
+                
+                <td>
+                  <div class="contact-info">
+                    <div><i class="fas fa-envelope me-2"></i>{{ order.customerDetails?.email }}</div>
+                    <div><i class="fas fa-phone me-2"></i>{{ order.customerDetails?.phone }}</div>
+                    <div><i class="fas fa-map-marker-alt me-2"></i>{{ order.customerDetails?.address }}</div>
+                  </div>
+                </td>
+                
+                <td>
+                  <div
+                    class="status-badge"
+                    [ngClass]="{
+                      'status-received': order.status == ShippingStatus.RECEIVED,
+                      'status-processed': order.status == ShippingStatus.PROCESSED,
+                      'status-shipped': order.status == ShippingStatus.SHIPPED,
+                      'status-delivered': order.status == ShippingStatus.DELIVERED,
+                      'status-canceled': order.status == ShippingStatus.CANCELLED
+                    }"
+                    (click)="selectShipping(order)"
+                    data-bs-toggle="modal" data-bs-target="#formModal3"
+                  >
+                    {{ order.status }}
+                  </div>
+                </td>
+             
+              </tr>
+            </tbody>
+            
+            
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="formModal3" tabindex="-1" aria-labelledby="formModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content bg-white text-dark rounded shadow">
+        
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title" id="formModal3Label">Order Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="ConfirmationCode" class="form-label fw-semibold">Confirmation Code</label>
+              <input type="text" class="form-control" id="ConfirmationCode" name="confirmationCode" [(ngModel)]="confirmShipment.confirmationCode" required>
+            </div>
+  
+            <div class="d-flex justify-content-center mt-4">
+              <button type="button" class="btn btn-success w-100" (click)="confirmDelivery()" data-bs-dismiss="modal">
+                <i class="fas fa-check-circle me-2"></i> Confirm Shipment
+              </button>
+            </div>
+          </form>
+        </div>
+  
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
