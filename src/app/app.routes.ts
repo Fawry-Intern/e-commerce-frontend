@@ -12,7 +12,7 @@ import { CustomerDeliveryComponent } from './pages/customer/customer-delivery/cu
 import { CustomerProductsComponent } from './pages/customer/customer-products/customer-products.component';
 
 export const routes: Routes = [
-    
+
     {path:'admin/users',component:AdminUserComponent},
     {path:'admin/delivery',component:AdminDeliveryComponent},
     {path:'admin/user',component:AdminUserComponent},
@@ -26,4 +26,4 @@ export const routes: Routes = [
     {path:'sign-up',component:SignUpComponent},
     {path:'reset-password',component:ResetPasswordComponent},
     {path:'**',redirectTo:'login'}
-]
+];
