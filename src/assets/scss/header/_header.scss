@@ -1,4 +1,6 @@
 /* ========== header css ========== */
+@use '../variables' as *;
+@use '../mixin' as *;
 
 .header {
   padding: 22px 0;

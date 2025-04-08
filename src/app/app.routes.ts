@@ -9,6 +9,7 @@ import { AdminCouponComponent } from './pages/admin/admin-coupon/admin-coupon.co
 import { ConsumedCouponsTableComponent } from './pages/admin/consumed-coupons-table/consumed-coupons-table.component';
 import { DeliveryPersonDashboardComponent } from './pages/delivery-person/delivery-person-dashboard/delivery-person-dashboard.component';
 import { CustomerDeliveryComponent } from './pages/customer/customer-delivery/customer-delivery.component';
+import { CustomerProductsComponent } from './pages/customer/customer-products/customer-products.component';
 
 export const routes: Routes = [
     
@@ -19,7 +20,6 @@ export const routes: Routes = [
     {path: 'admin/coupon-consumptions', component: ConsumedCouponsTableComponent},
     {path:'delivery-person/dashboard',component:DeliveryPersonDashboardComponent},
     {path:'customer/order-tracking',component:CustomerDeliveryComponent},
-
 
      {path:'profile/:id',component:ProfileComponent},
     {path:'login',component:LoginComponent},
