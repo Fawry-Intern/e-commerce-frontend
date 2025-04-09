@@ -578,3 +578,9 @@ table{
     display: block;
     margin: 0 auto;
   }
+
+  .new-shipping-hover:hover,
+.new-shipping-hover {
+  background-color: #d1f7d6 !important;
+  transition: background-color 0.3s ease;
+}
