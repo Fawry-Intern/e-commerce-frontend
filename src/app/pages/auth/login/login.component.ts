@@ -6,6 +6,7 @@ import { AuthDetails } from '../../../models/auth-details.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { NotificationService } from '../../../services/notification.service';
 @Component({
   selector: 'app-login',
   standalone:true,
@@ -40,6 +41,7 @@ onSubmit() {
             } 
             else{
                 localStorage.setItem('email',response.email.toLowerCase());
+                
               this.route.navigate(['delivery-person/dashboard']);
             }
         },
