@@ -39,6 +39,10 @@ onSubmit() {
             if (response.role.toLowerCase() === 'admin') {
                 this.route.navigate(['/admin/users']);
             } 
+            else if(response.role.toLowerCase()==='customer')
+            {
+              this.route.navigate(['/home']);
+            }
             else{
                 localStorage.setItem('email',response.email.toLowerCase());
                 

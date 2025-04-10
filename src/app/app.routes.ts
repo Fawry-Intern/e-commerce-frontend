@@ -9,6 +9,9 @@ import { AdminCouponComponent } from './pages/admin/admin-coupon/admin-coupon.co
 import { ConsumedCouponsTableComponent } from './pages/admin/consumed-coupons-table/consumed-coupons-table.component';
 import { DeliveryPersonDashboardComponent } from './pages/delivery-person/delivery-person-dashboard/delivery-person-dashboard.component';
 import { CustomerDeliveryComponent } from './pages/customer/customer-delivery/customer-delivery.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { Component } from '@angular/core';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
     
@@ -19,11 +22,12 @@ export const routes: Routes = [
     {path: 'admin/coupon-consumptions', component: ConsumedCouponsTableComponent},
     {path:'delivery-person/dashboard',component:DeliveryPersonDashboardComponent},
     {path:'customer/order-tracking',component:CustomerDeliveryComponent},
-
+     {path:'home', component:HomeComponent},
 
      {path:'profile/:id',component:ProfileComponent},
     {path:'login',component:LoginComponent},
     {path:'sign-up',component:SignUpComponent},
-    {path:'reset-password',component:ResetPasswordComponent},
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
     {path:'**',redirectTo:'login'}
 ]
