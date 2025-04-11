@@ -2,12 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RegisterRequest } from "../dtos/user/register-request.model";
 import { UserDetails } from "../models/user/user-details.model";
-import { catchError, Observable } from "rxjs";
+import { catchError, Observable, of } from "rxjs";
 import { AuthRequest } from "../dtos/user/auth-request.model";
 
 import { PasswordResetRequest } from "../dtos/user/password-reset-request.model";
 import { AuthDetails } from "../models/auth-details.model";
 import { environment } from "../../environments/environment";
+import { UserService } from "./user.service";
 
 @Injectable({
     providedIn:'root'
@@ -16,7 +17,7 @@ export class AuthService{
     private apiUrl = `${environment.apiUrl}/auth`;
 
 
-    constructor(private httpClient:HttpClient)
+    constructor(private httpClient: HttpClient, private userService: UserService)
     {
                                
     }
@@ -56,5 +57,26 @@ export class AuthService{
         request
       );
     }
-   
+
+
+    getLoggedInUser(): Observable<UserDetails> {
+      const userId = localStorage.getItem('userId');
+      if (this.isLoggedIn() && userId) {
+        if(localStorage.getItem('userDetails')!=null)
+        {
+          const userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}') as UserDetails;
+          return of(userDetails); // Return the cached user details
+        }
+        return this.userService.getUserProfile(Number(userId));
+      } else {
+        return of(null as unknown as UserDetails); // or throw an error if preferred
+      }
+    }
+
+    isLoggedIn(): boolean {
+        const token = localStorage.getItem('accessToken');
+        return !!token; 
+    }
+
+
 }

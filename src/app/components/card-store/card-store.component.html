@@ -1,0 +1,23 @@
+<div class="card-wrapper">
+    <div class="single-card-wrapper">
+      <div class="single-card card-style-1">
+  
+        <!-- Store Image -->
+        <div class="card-image text-center">
+          <a href="#">
+            <img [src]="store.imageUrl" alt="{{ store.name }}" class="img-fluid rounded" style="max-height: 150px;">
+          </a>
+        </div>
+  
+        <!-- Store Info -->
+        <div class="card-content text-center p-3">
+          <h4><a class="text-decoration-none text-dark">{{ store.name }}</a></h4>
+          <p class="text-muted">{{ store.address }}</p>
+  
+          <a [routerLink]="['/customer/stores', store.id, 'products']" class="btn btn-outline-primary mt-2">Visit Store</a>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

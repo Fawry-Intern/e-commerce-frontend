@@ -1,0 +1,94 @@
+<header class="header py-3 bg-white shadow-sm sticky-top">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center">
+
+    <!-- Logo -->
+    <div class="d-flex align-items-center me-4">
+      <a href="#">
+        <img src="logo.png" alt="Logo" height="40" />
+      </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex-grow-1 mx-3">
+      <form 
+        class="position-relative" 
+        (ngSubmit)="onSearch(searchInput.value)">
+        
+        <input
+            #searchInput
+            type="text"
+            name="search"             
+            id="searchInput"           
+            class="form-control ps-5"
+            placeholder="Search product..."
+            style="height: 48px;"
+          />
+
+
+        <button 
+          type="submit"
+          class="btn position-absolute top-50 start-0 translate-middle-y ps-3 border-0 bg-transparent">
+          <i class="fas fa-search"></i>
+        </button>
+
+      </form>
+    </div>
+
+
+    <!-- Right Side -->
+    <div class="d-flex align-items-center">
+      <!-- Cart -->
+      <button class="btn me-3" title="Cart">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+
+      <!-- Profile -->
+      <div class="dropdown">
+        <button 
+          class="btn dropdown-toggle d-flex align-items-center" 
+          data-bs-toggle="dropdown" 
+          aria-expanded="false">
+          <div class="text-start d-none d-md-block">
+        <p *ngIf="isLoggedIn; else guestTemplate" class="mb-0 small">Hello, {{ userFirstName }}</p>
+        <ng-template #guestTemplate>
+          <p class="mb-0 small">Hello, User</p>
+        </ng-template>
+        <strong>Account & Lists</strong>
+          </div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+            <a class="dropdown-item" [routerLink]="['/profile', userId]" routerLinkActive="active">
+              <i class="fas fa-user me-2"></i>Your Account
+            </a>
+            </li>
+
+          <li class="dropdown-item">
+        <a class="d-flex align-items-center text-black" [routerLink]="['/customer/stores']" routerLinkActive="active">
+          <i class="fas fa-store me-2"></i>
+          <span>Stores</span>
+        </a>
+          </li>
+
+          <ng-container *ngIf="isLoggedIn; else loginTemplate">
+        <li>
+          <a class="dropdown-item" (click)="onSignOut()">
+            <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+          </a>
+        </li>
+          </ng-container>
+
+          <ng-template #loginTemplate>
+        <li>
+          <a class="dropdown-item" href="#">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
+          </a>
+        </li>
+          </ng-template>
+
+        </ul>
+      </div>
+      </div>
+    </div>
+
+</header>

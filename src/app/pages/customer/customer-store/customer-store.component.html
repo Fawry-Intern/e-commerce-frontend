@@ -1,0 +1,10 @@
+<app-customer-navebare (searchTextChanged)="handleSearch($event)"></app-customer-navebare>
+
+<!-- Page Content -->
+<div class="container mt-4">    
+    <div class="store-grid">
+        <div class="store-column" *ngFor="let store of filteredStores">
+            <app-card-store [store]="store"></app-card-store>
+        </div>
+    </div>
+</div>
