@@ -1,23 +1,26 @@
 <div class="card-wrapper">
-    <div class="single-card-wrapper">
-      <div class="single-card card-style-1">
-        
-        <!-- Product Image -->
-        <div class="card-image">
+  <div class="single-card-wrapper">
+    <div class="single-card card-style-1">
+      
+      <!-- Product Image -->
+       <div class="card-image">
+        <a href="#">
           <img [src]="product.imageUrl" alt="{{ product.name }}">
-        </div>
-  
-        <!-- Product Info -->
-        <div class="card-content">
-          <h4>{{ product.name }}</h4>
-          <p class="text-muted mb-2">{{ product.description }}</p>
-          <h5 class="text-primary">{{ product.price | currency:'USD' }}</h5>
-  
-          <button class="btn btn-sm btn-primary mt-2">
-            Add to Cart
-          </button>
-        </div>
+        </a>
+       </div>
+    
+
+      <!-- Product Info -->
+      <div class="card-content">
+        <h4><a href="#">{{ product.name }}</a></h4>
+        <p class="text-muted mb-2">{{ product.description }}</p>
+        <h5 class="text-primary">{{ product.price | currency }}</h5>
+
+        <button class="btn btn-primary mt-3">
+          Add to Cart
+        </button>
       </div>
+
     </div>
   </div>
-  
+</div>

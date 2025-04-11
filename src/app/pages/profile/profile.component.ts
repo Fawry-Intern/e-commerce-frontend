@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { UserDetails } from '../../models/user/user-details.model';
 
@@ -8,9 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { AdminSidebarComponent } from '../../components/admin-sidebar/admin-sidebar.component';
 import { AdminUserComponent } from '../admin/admin-user/admin-user.component';
 import { PasswordChangeRequest } from '../../dtos/user/password-change-request.model';
+import { CustomerNavebareComponent } from '../../components/customer-navebare/customer-navebare.component';
+import { UserRole } from '../../enums/user-role.model';
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,FormsModule,AdminSidebarComponent,AdminUserComponent ],
+  imports: [CommonModule,FormsModule,AdminSidebarComponent,AdminUserComponent,CustomerNavebareComponent ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -18,12 +20,13 @@ export class ProfileComponent {
 
   userId:Number=0;
   user:UserDetails | undefined;
+  UserRole=UserRole;
 
   passwordChangeRequest: PasswordChangeRequest = { oldPassword: '', newPassword: '' };
-  constructor(private route:ActivatedRoute,private userService:UserService)
-  {
-
-  }
+  constructor(private route:ActivatedRoute,private userService:UserService, private router: Router)
+    {
+  
+    }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
@@ -54,6 +57,12 @@ export class ProfileComponent {
     }
   }
 
+  handleSearch(searchText: string) {
+    this.router.navigate(['/customer/stores'], {
+      queryParams: { search: searchText }
+    });
+  }
+
 
 isAdmin():Boolean
 {
@@ -71,4 +80,5 @@ isCustomer():Boolean
   
 return localStorage.getItem('role')!=='CUSTOMER'
 }
+ 
 }

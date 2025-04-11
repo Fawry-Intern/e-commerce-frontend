@@ -20,7 +20,7 @@
             name="search"             
             id="searchInput"           
             class="form-control ps-5"
-            placeholder="Search store..."
+            placeholder="Search product..."
             style="height: 48px;"
           />
 
@@ -37,6 +37,11 @@
 
     <!-- Right Side -->
     <div class="d-flex align-items-center">
+      <!-- Cart -->
+      <button class="btn me-3" title="Cart">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+
       <!-- Profile -->
       <div class="dropdown">
         <button 
@@ -59,7 +64,7 @@
             </li>
 
           <li class="dropdown-item">
-        <a class="d-flex align-items-center text-black" [routerLink]="['/customer/stores']">
+        <a class="d-flex align-items-center text-black" [routerLink]="['/customer/stores']" routerLinkActive="active">
           <i class="fas fa-store me-2"></i>
           <span>Stores</span>
         </a>

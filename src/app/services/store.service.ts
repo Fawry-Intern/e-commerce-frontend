@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AdminStore } from '../dtos/store/admin-store.model';
 import {catchError, Observable, of, throwError} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Product } from '../models/product/product.model';
+import { Store } from '../models/store/store.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  private apiUrl = `${environment.apiUrl}/api/stores`;
+  private apiUrl = `${environment.apiUrl}/stores`;
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private httpClient: HttpClient) {
@@ -22,17 +24,14 @@ export class StoreService {
     });
   }
 
-  getAllStores(): Observable<AdminStore[]> {
-    this.updateHeaders();
-    return this.httpClient.get<AdminStore[]>(this.apiUrl, { headers: this.headers }).pipe(
+  getAllStores(): Observable<Store[]> {
+    return this.httpClient.get<Store[]>(this.apiUrl).pipe(
       catchError(() => {
         console.warn('API failed, using demo stores');
         return of([]);
       })
     );
   }
-
-
 
   deleteStore(id: number): Observable<void> {
     this.updateHeaders();
@@ -44,26 +43,13 @@ export class StoreService {
     );
   }
 
-  // You can add more CRUD methods (createStore, updateStore, etc.) as needed.
-}
-import { Injectable } from "@angular/core";
-
-@Injectable({
-    providedIn: 'root'
-  })
-export class StoreService {
-    private store: any = null; // Initialize store as null
-
-    constructor() {
-        this.loadStoreFromLocalStorage(); // Load the store from local storage on initialization
-    }
-
-    private loadStoreFromLocalStorage(): void {
-        const storedData = localStorage.getItem('store');
-        if (storedData) {
-            this.store = JSON.parse(storedData);
-        } else {
-            this.store = {}; // Initialize with an empty object if no data is found
-        }
-    }
+  getProductsByStoreId(storeId: number): Observable<Product[]> {
+    this.updateHeaders();
+    return this.httpClient.get<Product[]>(`${this.apiUrl}/${storeId}/products`, { headers: this.headers }).pipe(
+      catchError((error) => {
+        console.error(`Error fetching products for store with id ${storeId}:`, error);
+        return throwError(error);
+      })
+    );
+  }
 }

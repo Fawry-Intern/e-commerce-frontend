@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-customer-navebare',
+  selector: 'app-customer-product-navbar',
+  standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './customer-navebare.component.html',
-  styleUrl: './customer-navebare.component.css'
+  templateUrl: './customer-product-navbar.component.html',
+  styleUrl: './customer-product-navbar.component.css'
 })
-export class CustomerNavebareComponent {
+export class CustomerProductNavbarComponent {
   @Output() searchTextChanged = new EventEmitter<string>();
   userFirstName: string | null = null;
   isLoggedIn: boolean = false;
@@ -31,7 +32,7 @@ export class CustomerNavebareComponent {
   }
 
   onStoreClick() {
-    this.router.navigate(['/customer/stores']);
+    this.router.navigate(['/customer/products']);
   }
 
   onSignOut() {

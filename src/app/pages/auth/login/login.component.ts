@@ -38,9 +38,12 @@ onSubmit() {
             if (response.role.toLowerCase() === 'admin') {
                 this.route.navigate(['/admin/users']);
             } 
-            else{
+            else if (response.role.toLowerCase() === 'delivery'){
                 localStorage.setItem('email',response.email.toLowerCase());
-              this.route.navigate(['delivery-person/dashboard']);
+                this.route.navigate(['delivery-person/dashboard']);
+            }
+            else {
+              this.route.navigate(['/customer/stores']);
             }
         },
         error: (err) => {
