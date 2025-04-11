@@ -1,6 +1,5 @@
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AdminStore } from '../dtos/store/admin-store.model';
 import {catchError, Observable, of, throwError} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product/product.model';

@@ -9,11 +9,16 @@ import { AdminCouponComponent } from './pages/admin/admin-coupon/admin-coupon.co
 import { ConsumedCouponsTableComponent } from './pages/admin/consumed-coupons-table/consumed-coupons-table.component';
 import { DeliveryPersonDashboardComponent } from './pages/delivery-person/delivery-person-dashboard/delivery-person-dashboard.component';
 import { CustomerDeliveryComponent } from './pages/customer/customer-delivery/customer-delivery.component';
+
 import { CustomerProductsComponent } from './pages/customer/customer-products/customer-products.component';
 import { CustomerStoreComponent } from './pages/customer/customer-store/customer-store.component';
 
-export const routes: Routes = [
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { HomeComponent } from './pages/home/home.component';
 
+
+export const routes: Routes = [
+    
     {path:'admin/users',component:AdminUserComponent},
     {path:'admin/delivery',component:AdminDeliveryComponent},
     {path:'admin/user',component:AdminUserComponent},
@@ -23,10 +28,13 @@ export const routes: Routes = [
     {path:'customer/order-tracking',component:CustomerDeliveryComponent},
     {path:'customer/stores/:storeId/products',component:CustomerProductsComponent},
     {path:'customer/stores',component:CustomerStoreComponent},
+     {path:'home', component:HomeComponent},
+
 
      {path:'profile/:id',component:ProfileComponent},
     {path:'login',component:LoginComponent},
     {path:'sign-up',component:SignUpComponent},
-    {path:'reset-password',component:ResetPasswordComponent},
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
     {path:'**',redirectTo:'login'}
-];
+]

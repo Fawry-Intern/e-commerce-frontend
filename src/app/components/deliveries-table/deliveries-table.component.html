@@ -23,7 +23,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of filteredShippings">
+                <tr *ngFor="let order of filteredShippings"   
+                [ngClass]="{ 'new-shipping-hover': order.shipmentId === latestNewShippingId }">
+                
                 <td>
                   <div class="d-flex align-items-center">
                     <div class="avatar-circle">

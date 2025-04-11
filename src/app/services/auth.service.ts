@@ -48,15 +48,16 @@ export class AuthService{
     }
 
     forgotPassword(email: string): Observable<string> {
-        return this.httpClient.post(`${environment.apiUrl}/reset-password-request`, { email }, { responseType: 'text' });
+        return this.httpClient.post(`${this.apiUrl}/reset-password-request`, { email }, { responseType: 'text' });
     }
 
     resetPassword(request: PasswordResetRequest): Observable< String > {
       return this.httpClient.put< String >(
-        `${environment.apiUrl}/reset-password`, 
+        `${this.apiUrl}/reset-password`, 
         request
       );
     }
+
 
     getLoggedInUser(): Observable<UserDetails> {
       const userId = localStorage.getItem('userId');
@@ -76,5 +77,6 @@ export class AuthService{
         const token = localStorage.getItem('accessToken');
         return !!token; 
     }
+
 
 }

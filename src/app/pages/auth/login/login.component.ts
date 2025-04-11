@@ -6,6 +6,7 @@ import { AuthDetails } from '../../../models/auth-details.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { NotificationService } from '../../../services/notification.service';
 @Component({
   selector: 'app-login',
   standalone:true,
@@ -38,12 +39,14 @@ onSubmit() {
             if (response.role.toLowerCase() === 'admin') {
                 this.route.navigate(['/admin/users']);
             } 
-            else if (response.role.toLowerCase() === 'delivery'){
-                localStorage.setItem('email',response.email.toLowerCase());
-                this.route.navigate(['delivery-person/dashboard']);
-            }
-            else {
+            else if(response.role.toLowerCase()==='customer')
+            {
               this.route.navigate(['/customer/stores']);
+            }
+            else{
+                localStorage.setItem('email',response.email.toLowerCase());
+                
+              this.route.navigate(['delivery-person/dashboard']);
             }
         },
         error: (err) => {
