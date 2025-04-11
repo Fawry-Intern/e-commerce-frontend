@@ -53,7 +53,11 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
-            <a class="dropdown-item" [routerLink]="['/profile', userId]" routerLinkActive="active">
+            <a 
+              class="dropdown-item" 
+              *ngIf="isLoggedIn" 
+              [routerLink]="['/profile', userId]" 
+              routerLinkActive="active">
               <i class="fas fa-user me-2"></i>Your Account
             </a>
             </li>
