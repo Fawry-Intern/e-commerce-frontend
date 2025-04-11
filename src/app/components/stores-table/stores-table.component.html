@@ -1,0 +1,109 @@
+<div class="container-fluid p-4">
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-primary fw-bold">Store Management</h3>
+        <div class="d-flex gap-3 align-items-center">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search Stores..."
+              [(ngModel)]="searchQuery"
+              (input)="filterStores()"
+            />
+          </div>
+          <span class="badge bg-primary">{{ filteredStores.length }} Stores</span>
+          <button class="btn btn-success" (click)="createStore()">
+            <i class="fas fa-plus"></i> Create New Store
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>Address</th>
+            <th>Store ID</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let store of filteredStores">
+            <td class="fw-bold">{{ store.name }}</td>
+            <td>{{ store.address }}</td>
+            <td>
+              <small class="text-muted">ID: {{ store.id }}</small>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="viewStoreDetails(store)">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteStore(store)">
+                  <i class="fas fa-trash"></i>
+                </button>
+
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Store Details Modal -->
+<div class="modal fade" id="storeDetailsModal" tabindex="-1" aria-labelledby="storeDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="storeDetailsLabel">Store Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedStore">
+        <p><strong>ID:</strong> {{ selectedStore.id }}</p>
+        <p><strong>Name:</strong> {{ selectedStore.name }}</p>
+        <p><strong>Address:</strong> {{ selectedStore.address }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Store Modal -->
+<div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createStoreLabel">Create New Store</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="storeName" class="form-label">Store Name</label>
+            <input type="text" class="form-control" id="storeName" [(ngModel)]="newStore.name" name="storeName" />
+          </div>
+          <div class="mb-3">
+            <label for="storeAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="storeAddress" [(ngModel)]="newStore.address" name="storeAddress" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addStore()">Add Store</button>
+      </div>
+    </div>
+  </div>
+</div>
