@@ -1,0 +1,105 @@
+.card-style-1 {
+  background: #fff;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  padding: 25px 20px;
+  position: relative;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  width: 250px; /* Smaller width */
+  height: 500px; /* Fixed height */
+  margin: 0 auto; /* Centers the card */
+  overflow: hidden; /* Prevents content overflow */
+}
+
+.card-style-1:hover {
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-style-1 .card-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 30px;
+}
+
+@media (max-width: 767px) {
+  .card-style-1 {
+    padding: 15px 10px;
+    width: 100%; /* Full width on smaller screens */
+    max-width: 250px; /* Limits max width on small screens */
+  }
+  .card-style-1 .card-meta {
+    padding: 0 20px;
+  }
+}
+
+.card-style-1 .card-meta .image {
+  max-width: 50px; /* Increased max-width for the image */
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  width: 100%; /* Ensures the image fills the container width */
+  height: auto; /* Maintains the aspect ratio of the image */
+  object-fit: cover; /* Ensures the image covers the space without distortion */
+}
+
+.card-style-1 .card-meta .image img {
+  width: 100%;
+}
+
+.card-style-1 .card-meta .text p {
+  color: #1A2142;
+}
+
+.card-style-1 .card-meta .text p a {
+  color: inherit;
+}
+
+.card-style-1 .card-meta .text p a:hover {
+  color: #365CF5;
+}
+
+.card-style-1 .card-image {
+  border-radius: 10px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  height: 250px; /* Height for the image container */
+}
+
+.card-style-1 .card-image a {
+  display: block;
+}
+
+.card-style-1 .card-image img {
+  width: 100%;
+  height: 100%; /* Ensures the image takes up the full height of the container */
+  object-fit: cover; /* Ensures the image covers the space without distortion */
+}
+
+.card-style-1 .card-content {
+  padding: 0px 30px;
+  height: 180px; /* Height for the content section */
+  overflow: hidden; /* Prevents overflow content */
+}
+
+@media (max-width: 767px) {
+  .card-style-1 .card-content {
+    padding: 0px 20px;
+  }
+}
+
+.card-style-1 .card-content h4 a {
+  color: inherit;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.card-style-1 .card-content h4 a:hover {
+  color: #365CF5;
+}

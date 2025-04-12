@@ -41,7 +41,7 @@ onSubmit() {
             } 
             else if(response.role.toLowerCase()==='customer')
             {
-              this.route.navigate(['/home']);
+              this.route.navigate(['/customer/stores']);
             }
             else{
                 localStorage.setItem('email',response.email.toLowerCase());
