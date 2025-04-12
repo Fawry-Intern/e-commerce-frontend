@@ -51,6 +51,16 @@ export class ProductService {
     );
   }
 
+  updateProduct(product: AdminProduct): Observable<AdminProduct> {
+    this.updateHeaders();
+    return this.httpClient.put<AdminProduct>(`${this.apiUrl}/${product.id}`, product, { headers: this.headers }).pipe(
+        catchError((error) => {
+          console.error('Error Updating product:', error);
+          return throwError(error);
+        })
+    );
+  }
+
   // Delete a product by ID
   deleteProduct(productId: number): Observable<void> {
     this.updateHeaders();
@@ -98,4 +108,6 @@ export class ProductService {
       })
     );
   }
+
+
 }

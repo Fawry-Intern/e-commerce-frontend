@@ -1,27 +1,44 @@
-import {Component, Input} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {AdminProduct} from '../../dtos/product/admin-product.model';
-import {Router} from '@angular/router';
-import bootstrap from 'bootstrap';
-import {ProductService} from '../../services/product.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AdminProduct } from '../../dtos/product/admin-product.model';
+import { Router } from '@angular/router';
+import * as bootstrap from 'bootstrap';
+import { ProductService } from '../../services/product.service';
+import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-products-table',
+  standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgIf,
+    NgForOf,
+    NgOptimizedImage
   ],
   templateUrl: './products-table.component.html',
-  styleUrl: './products-table.component.css'
+  styleUrls: ['./products-table.component.css']
 })
-export class ProductsTableComponent {
-  // Search query for filtering products
-  searchQuery: string = '';
-  // Full list of products fetched from the service
+export class ProductsTableComponent implements OnInit {
   @Input() products: AdminProduct[] = [];
-  // List of products displayed after filtering
   filteredProducts: AdminProduct[] = [];
-  selectedProduct: AdminProduct = { id: 0, name: '', price: 0, description: '', imageUrl: '' };
-  newProduct: AdminProduct = { id: 0, name: '', price: 0, description: '', imageUrl: '' };
+
+  searchQuery: string = '';
+
+  selectedProduct: AdminProduct = {
+    id: 0,
+    name: '',
+    price: 0,
+    description: '',
+    imageUrl: ''
+  };
+
+  newProduct: AdminProduct = {
+    id: 0,
+    name: '',
+    price: 0,
+    description: '',
+    imageUrl: ''
+  };
 
   constructor(
     private productService: ProductService,
@@ -32,7 +49,6 @@ export class ProductsTableComponent {
     this.fetchProducts();
   }
 
-  // Fetch products from the backend via the service
   fetchProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (products: AdminProduct[]) => {
@@ -45,22 +61,19 @@ export class ProductsTableComponent {
     });
   }
 
-  // Filter products based on the search query
   filterProducts(): void {
     if (!this.searchQuery) {
       this.filteredProducts = this.products;
       return;
     }
     const lowerQuery = this.searchQuery.toLowerCase();
-    this.filteredProducts = this.products.filter((product: AdminProduct) =>
+    this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(lowerQuery)
     );
   }
 
-  // Navigate to a detailed view for a product
   viewProductDetails(product: AdminProduct): void {
     this.selectedProduct = { ...product };
-
     const modalElement = document.getElementById('productDetailsModal');
     if (modalElement) {
       const modalInstance = new bootstrap.Modal(modalElement);
@@ -68,12 +81,10 @@ export class ProductsTableComponent {
     }
   }
 
-  // Delete a product after confirmation
   deleteProduct(product: AdminProduct): void {
     if (confirm(`Are you sure you want to delete the product "${product.name}"?`)) {
       this.productService.deleteProduct(product.id).subscribe({
         next: () => {
-          // Remove the deleted product from the local list and reapply filter
           this.products = this.products.filter(p => p.id !== product.id);
           this.filterProducts();
         },
@@ -84,10 +95,14 @@ export class ProductsTableComponent {
     }
   }
 
-  // Show the modal to create a new product
   createProduct(): void {
-    this.newProduct = { id: 0, name: '', price: 0, description: '', imageUrl: '' };
-
+    this.newProduct = {
+      id: 0,
+      name: '',
+      price: 0,
+      description: '',
+      imageUrl: ''
+    };
     const modalElement = document.getElementById('createProductModal');
     if (modalElement) {
       const modalInstance = new bootstrap.Modal(modalElement);
@@ -95,7 +110,6 @@ export class ProductsTableComponent {
     }
   }
 
-  // Add the new product
   addProduct(): void {
     if (this.newProduct.name.trim() && this.newProduct.price && this.newProduct.description.trim()) {
       this.productService.createProduct(this.newProduct).subscribe({
@@ -111,6 +125,38 @@ export class ProductsTableComponent {
         },
         error: (err: any) => {
           console.error('Error creating product:', err);
+        }
+      });
+    }
+  }
+
+  openEditModal(product: AdminProduct): void {
+    this.selectedProduct = { ...product };
+    const modalElement = document.getElementById('editProductModal');
+    if (modalElement) {
+      const modalInstance = new bootstrap.Modal(modalElement);
+      modalInstance.show();
+    }
+  }
+
+  editProduct(product: AdminProduct): void {
+    if (product.name.trim() && product.price && product.description.trim()) {
+      this.productService.updateProduct(product).subscribe({
+        next: (updatedProduct: AdminProduct) => {
+          const index = this.products.findIndex(p => p.id === updatedProduct.id);
+          if (index !== -1) {
+            this.products[index] = updatedProduct;
+          }
+          this.filterProducts();
+
+          const modalElement = document.getElementById('editProductModal');
+          if (modalElement) {
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            modalInstance?.hide();
+          }
+        },
+        error: (err: any) => {
+          console.error('Error updating product:', err);
         }
       });
     }

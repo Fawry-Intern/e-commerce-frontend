@@ -7,7 +7,6 @@ import {ProductsTableComponent} from '../../../components/products-table/product
   selector: 'app-admin-product',
   imports: [
     AdminSidebarComponent,
-    StoresTableComponent,
     ProductsTableComponent
   ],
   templateUrl: './admin-product.component.html',
