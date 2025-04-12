@@ -1,0 +1,123 @@
+<div class="container-fluid p-4">
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-primary fw-bold">Product Stock Management</h3>
+        <div class="d-flex gap-3 align-items-center">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search Products..."
+              [(ngModel)]="searchQuery"
+              (input)="filterProducts()"
+            />
+          </div>
+          <span class="badge bg-primary">{{ filteredProductStocks.length }} Products</span>
+          <button class="btn btn-success" (click)="createProduct()">
+            <i class="fas fa-plus"></i> Add New Product Stock
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th>Product ID</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of filteredProductStocks">
+            <td class="fw-bold">{{ product.productName }}</td>
+            <td>${{ product.productPrice.toFixed(2) }}</td>
+            <td>{{ product.stockAvailableQuantity }}</td>
+            <td>{{ product.productId }}</td>
+            <td>
+              <div class="action-buttons">
+                <!-- View Product Stock Button -->
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="viewProductStockDetails(product)">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <!-- Delete Product Stock Button -->
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(product)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Stock Details Modal -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productDetailsLabel">Product Stock Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedProductStock">
+        <p><strong>ID:</strong> {{ selectedProductStock.productId }}</p>
+        <p><strong>Name:</strong> {{ selectedProductStock.productName }}</p>
+        <p><strong>Price:</strong> ${{ selectedProductStock.productPrice.toFixed(2) }}</p>
+        <p><strong>Stock Available Quantity:</strong> {{ selectedProductStock.stockAvailableQuantity }}</p>
+        <p><strong>Description:</strong> {{ selectedProductStock.productDescription }}</p>
+        <p><strong>Image:</strong>
+          <img [ngSrc]="selectedProductStock.productImage"
+               alt="{{ selectedProductStock.productName }}"
+               class="img-fluid"
+          />
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Product Stock Modal -->
+<div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createProductLabel">Create New Product Stock</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="productId" class="form-label">Product Name</label>
+            <select class="form-select" id="productId" [(ngModel)]="newProduct.productId" name="productId">
+              <option *ngFor="let product of products" [value]=product.id>
+                {{ product.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="stockAvailableQuantity" class="form-label">Stock Quantity</label>
+            <input type="number" class="form-control" id="stockAvailableQuantity" [(ngModel)]="newProduct.stockAvailableQuantity" name="stockAvailableQuantity" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addProduct()">Add Product Stock</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -74,12 +74,13 @@
         <p><strong>Name:</strong> {{ selectedProduct.name }}</p>
         <p><strong>Price:</strong> ${{ selectedProduct.price.toFixed(2) }}</p>
         <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
-        <p><strong>Image:</strong></p>
+        <p><strong>Image:</strong>
         <img
           [ngSrc]="selectedProduct.imageUrl"
           alt="{{ selectedProduct.name }}"
           class="product-image"
         />
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -18,6 +18,7 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { Component } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import {AdminProductComponent} from './pages/admin/admin-product/admin-product.component';
+import {AdminProductsStoreComponent} from './pages/admin/admin-products-store/admin-products-store.component';
 
 
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
     {path:'admin/delivery',component:AdminDeliveryComponent},
     {path:'admin/user',component:AdminUserComponent},
     {path:'admin/store',component:AdminStoreComponent},
+    {path:'admin/store/:id',component:AdminProductsStoreComponent},
     {path:'admin/product', component:AdminProductComponent},
     {path:'admin/coupon', component: AdminCouponComponent},
     {path: 'admin/coupon-consumptions', component: ConsumedCouponsTableComponent},
@@ -34,8 +36,6 @@ export const routes: Routes = [
     {path:'customer/stores/:storeId/products',component:CustomerProductsComponent},
     {path:'customer/stores',component:CustomerStoreComponent},
      {path:'home', component:HomeComponent},
-
-
      {path:'profile/:id',component:ProfileComponent},
     {path:'login',component:LoginComponent},
     {path:'sign-up',component:SignUpComponent},
