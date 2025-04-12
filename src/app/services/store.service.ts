@@ -1,9 +1,10 @@
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError, Observable, of, throwError} from 'rxjs';
-import { Injectable } from '@angular/core';
 import { Product } from '../models/product/product.model';
 import { Store } from '../models/store/store.model';
+import { AdminStore } from '../dtos/store/admin-store.model';
+import {catchError, Observable, of, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { Store } from '../models/store/store.model';
 export class StoreService {
   private apiUrl = `${environment.apiUrl}/stores`;
   private headers: HttpHeaders = new HttpHeaders();
+  private createdStore: { name: string; address: string; } | undefined;
 
   constructor(private httpClient: HttpClient) {
     this.updateHeaders();
@@ -23,11 +25,25 @@ export class StoreService {
     });
   }
 
-  getAllStores(): Observable<Store[]> {
-    return this.httpClient.get<Store[]>(this.apiUrl).pipe(
+  getAllStores(): Observable<AdminStore[]> {
+    this.updateHeaders();
+    return this.httpClient.get<AdminStore[]>(this.apiUrl, { headers: this.headers }).pipe(
       catchError(() => {
         console.warn('API failed, using demo stores');
         return of([]);
+      })
+    );
+  }
+
+  createStore(store: AdminStore): Observable<AdminStore> {
+    this.updateHeaders();
+    this.createdStore = {
+      name: store.name,
+      address: store.address,
+    };
+    return this.httpClient.post<AdminStore>(this.apiUrl, this.createdStore, { headers: this.headers }).pipe(
+      catchError((error) => {
+        return throwError(error);
       })
     );
   }
@@ -41,14 +57,13 @@ export class StoreService {
       })
     );
   }
-
   getProductsByStoreId(storeId: number): Observable<Product[]> {
     this.updateHeaders();
     return this.httpClient.get<Product[]>(`${this.apiUrl}/${storeId}/products`, { headers: this.headers }).pipe(
-      catchError((error) => {
-        console.error(`Error fetching products for store with id ${storeId}:`, error);
-        return throwError(error);
-      })
+        catchError((error) => {
+          console.error(`Error fetching products for store with id ${storeId}:`, error);
+          return throwError(error);
+        })
     );
   }
 }
