@@ -76,21 +76,7 @@ export class StoresTableComponent implements OnInit {
   }
 
 
-  // Delete a store after confirmation.
-  deleteStore(store: AdminStore): void {
-    if (confirm(`Are you sure you want to delete the store "${store.name}"?`)) {
-      this.storeService.deleteStore(store.id).subscribe({
-        next: () => {
-          // Remove the deleted store from the local list and reapply filter.
-          this.stores = this.stores.filter(s => s.id !== store.id);
-          this.filterStores();
-        },
-        error: (err: any) => {
-          console.error('Error deleting store:', err);
-        }
-      });
-    }
-  }
+ 
 
   createStore(): void {
     this.newStore = { id: 0, name: '', address: '',imageUrl:'' };
@@ -117,5 +103,9 @@ export class StoresTableComponent implements OnInit {
         }
       });
     }
+  }
+
+  goToStore(id:Number){
+    this.router.navigate(['/admin/store',id])
   }
 }

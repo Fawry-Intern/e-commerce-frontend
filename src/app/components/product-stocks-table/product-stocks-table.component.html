@@ -60,32 +60,47 @@
 
 <!-- Product Stock Details Modal -->
 <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="productDetailsLabel">Product Stock Details</h5>
+      
+      <div class="modal-header bg-light">
+        <h5 class="modal-title fw-bold" id="productDetailsLabel">Product Stock Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" *ngIf="selectedProductStock">
-        <p><strong>ID:</strong> {{ selectedProductStock.productId }}</p>
-        <p><strong>Name:</strong> {{ selectedProductStock.productName }}</p>
-        <p><strong>Price:</strong> ${{ selectedProductStock.productPrice.toFixed(2) }}</p>
-        <p><strong>Stock Available Quantity:</strong> {{ selectedProductStock.stockAvailableQuantity }}</p>
-        <p><strong>Description:</strong> {{ selectedProductStock.productDescription }}</p>
-        <p><strong>Image:</strong>
-          <img [ngSrc]="selectedProductStock.productImage"
-               alt="{{ selectedProductStock.productName }}"
-               class="img-fluid"
-          />
-        </p>
 
+      <div class="modal-body" *ngIf="selectedProductStock">
+        <div class="row g-4 align-items-center">
+          <!-- Text Details -->
+          <div class="col-md-6">
+            <div class="text-start">
+              <p class="mb-2"><strong class="text-secondary">ID:</strong> <span class="fs-6">{{ selectedProductStock.productId }}</span></p>
+              <p class="mb-2"><strong class="text-secondary">Name:</strong> <span class="fs-6">{{ selectedProductStock.productName }}</span></p>
+              <p class="mb-2"><strong class="text-secondary">Price:</strong> <span class="fs-6 text-success">${{ selectedProductStock.productPrice.toFixed(2) }}</span></p>
+              <p class="mb-2"><strong class="text-secondary">Stock Quantity:</strong> <span class="fs-6">{{ selectedProductStock.stockAvailableQuantity }}</span></p>
+              <p class="mb-2"><strong class="text-secondary">Description:</strong> <span class="fs-6">{{ selectedProductStock.productDescription }}</span></p>
+            </div>
+          </div>
+
+          <!-- Product Image -->
+          <div class="col-md-6 text-center">
+            <img 
+              [ngSrc]="selectedProductStock.productImage"
+              alt="{{ selectedProductStock.productName }}"
+              class="img-fluid rounded shadow"
+              style="max-height: 400px; object-fit: cover;"
+            />
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
+
+      <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
+
     </div>
   </div>
 </div>
+
 
 <!-- Create Product Stock Modal -->
 <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
@@ -115,7 +130,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="addProduct()">Add Product Stock</button>
+        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Add Product Stock</button>
       </div>
     </div>
   </div>
