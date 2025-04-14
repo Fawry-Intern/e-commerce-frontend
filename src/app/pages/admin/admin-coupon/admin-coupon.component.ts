@@ -7,7 +7,8 @@ import { CreateCouponRequest } from '../../../dtos/coupons/create-coupon-request
 import { Router } from '@angular/router';
 import { Coupon } from '../../../models/coupon/coupon.model';
 import { CouponTableComponent } from '../../../components/coupon-table/coupon-table.component';
-import { ConsumedCouponsTableComponent } from '../consumed-coupons-table/consumed-coupons-table.component';
+import { ConsumedCouponsTableComponent } from '../admin-consumed-coupon/consumed-coupons-table.component';
+
 
 @Component({
   selector: 'app-admin-coupon',

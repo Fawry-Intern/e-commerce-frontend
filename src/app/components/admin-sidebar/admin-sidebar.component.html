@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
       <div class="logo-container">
-          <i class="fas fa-tachometer-alt"></i> <!-- Dashboard Icon -->
+          <i class="fas fa-user"></i> <!-- Dashboard Icon -->
           <span>Admin</span>
       </div>
   </div>
@@ -10,51 +10,48 @@
       <ul class="nav-menu">
           <li class="nav-item nav-item-has-children">
               <a class="nav-link" (click)="viewMyProfile()" >
-                  <i class="fas fa-user"></i> <!-- Profile Icon -->
+                  <i class="fas fa-user"></i> 
                   <span>Profile</span>
                   <i class="fas fa-chevron-down dropdown-icon"></i>
               </a>
           </li>
           <li class="nav-item nav-item-has-children">
-              <a class="nav-link" [routerLink]="['/admin/users']" >
-                  <i class="fas fa-users"></i> <!-- Users Icon -->
+              <a class="nav-link" (click)="viewUsers()" >
+                  <i class="fas fa-users"></i> 
                   <span>Users</span>
                   <i class="fas fa-chevron-down dropdown-icon"></i>
               </a>
              
           </li>
           <li class="nav-item nav-item-has-children">
-              <a class="nav-link" [routerLink]="['/admin/stores']">
-                  <i class="fas fa-store"></i> <!-- Store Icon -->
+              <a class="nav-link" (click)="viewStores()">
+                  <i class="fas fa-store"></i> 
                   <span>Stores</span>
                   <i class="fas fa-chevron-down dropdown-icon"></i>
               </a>
           </li>
           <li class="nav-item nav-item-has-children">
-              <a class="nav-link" [routerLink]="['/admin/products']">
-                  <i class="fas fa-box"></i> <!-- Product Icon -->
+              <a class="nav-link" (click)="viewProducts()">
+                  <i class="fas fa-box"></i> 
                   <span>Products</span>
                   <i class="fas fa-chevron-down dropdown-icon"></i>
               </a>
-              <ul class="dropdown-menu">
-                  <li><a href="#">Products</a></li>
-                  <li><a href="#">Add product</a></li>
-              </ul>
+             
           </li>
           <li class="nav-item nav-item-has-children">
             <a class="nav-link">
-                <i class="fas fa-tags"></i> <!-- Coupon Icon -->
+                <i class="fas fa-tags"></i> 
                 <span>Coupons</span>
                 <i class="fas fa-chevron-down dropdown-icon"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a (click)="viewcoupon()">Coupons</a></li>
-                <li><a (click)="viewcouponConsumptions()">Coupon Consumptions</a></li>
+                <li><a (click)="viewCoupons()">Coupons</a></li>
+                <li><a (click)="viewCouponConsumptions()">Coupon Consumptions</a></li>
             </ul>
         </li>
         <li class="nav-item nav-item-has-children">
-          <a class="nav-link" [routerLink]="['/admin/delivery']" >
-              <i class="fas fa-truck"></i> <!-- Shipping Icon -->
+          <a class="nav-link" (click)="viewShipping()" >
+              <i class="fas fa-truck"></i> 
               <span>Shipping</span>
               <i class="fas fa-chevron-down dropdown-icon"></i>
           </a>
@@ -65,7 +62,7 @@
 
   <div class="sidebar-footer">
       <a (click)="logout()" class="logout-link">
-          <i class="fas fa-sign-out-alt"></i> <!-- Logout Icon -->
+          <i class="fas fa-sign-out-alt"></i> 
           <span>Logout</span>
       </a>
   </div>

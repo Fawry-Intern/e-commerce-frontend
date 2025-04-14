@@ -7,7 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AdminDeliveryComponent } from './pages/admin/admin-delivery/admin-delivery.component';
 import { AdminCouponComponent } from './pages/admin/admin-coupon/admin-coupon.component';
 import { AdminStoreComponent } from "./pages/admin/admin-store/admin-store.component";
-import { ConsumedCouponsTableComponent } from './pages/admin/consumed-coupons-table/consumed-coupons-table.component';
+
 import { DeliveryPersonDashboardComponent } from './pages/delivery-person/delivery-person-dashboard/delivery-person-dashboard.component';
 import { CustomerDeliveryComponent } from './pages/customer/customer-delivery/customer-delivery.component';
 
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import {AdminProductComponent} from './pages/admin/admin-product/admin-product.component';
 import {AdminProductsStoreComponent} from './pages/admin/admin-products-store/admin-products-store.component';
+import { ConsumedCouponsTableComponent } from './pages/admin/admin-consumed-coupon/consumed-coupons-table.component';
 
 
 export const routes: Routes = [

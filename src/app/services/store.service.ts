@@ -48,11 +48,8 @@ export class StoreService {
 
   createStore(store: AdminStore): Observable<AdminStore> {
     this.updateHeaders();
-    this.createdStore = {
-      name: store.name,
-      address: store.address,
-    };
-    return this.httpClient.post<AdminStore>(this.apiUrl, this.createdStore, { headers: this.headers }).pipe(
+  
+    return this.httpClient.post<AdminStore>(this.apiUrl, store, { headers: this.headers }).pipe(
       catchError((error) => {
         return throwError(error);
       })

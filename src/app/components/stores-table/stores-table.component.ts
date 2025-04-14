@@ -18,14 +18,14 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./stores-table.component.css']
 })
 export class StoresTableComponent implements OnInit {
-  // Search query for filtering stores
+
   searchQuery: string = '';
-  // Full list of stores fetched from the service
+
   @Input() stores: AdminStore[] = [];
-  // List of stores displayed after filtering
+
   filteredStores: AdminStore[] = [];
-  selectedStore: AdminStore = { id: 0, name: '', address: '' };
-  newStore: AdminStore = { id: 0, name: '', address: '' };
+  selectedStore: AdminStore = { id: 0, name: '', address: '',imageUrl:'' };
+  newStore: AdminStore = { id: 0, name: '', address: '',imageUrl:'' };
 
   constructor(
     private storeService: StoreService,
@@ -36,7 +36,7 @@ export class StoresTableComponent implements OnInit {
     this.fetchStores();
   }
 
-  // Fetch stores from the backend via the service
+ 
   fetchStores(): void {
     this.storeService.getAllStores().subscribe({
       next: (stores: AdminStore[]) => {
@@ -93,7 +93,7 @@ export class StoresTableComponent implements OnInit {
   }
 
   createStore(): void {
-    this.newStore = { id: 0, name: '', address: '' };
+    this.newStore = { id: 0, name: '', address: '',imageUrl:'' };
 
     const modalElement = document.getElementById('createStoreModal');
     if (modalElement) {
@@ -104,16 +104,13 @@ export class StoresTableComponent implements OnInit {
 
   addStore(): void {
     if (this.newStore.name.trim() && this.newStore.address.trim()) {
+      console.log(this.newStore);
       this.storeService.createStore(this.newStore).subscribe({
         next: (createdStore: AdminStore) => {
           this.stores.push(createdStore);
           this.filterStores();
 
-          const modalElement = document.getElementById('createStoreModal');
-          if (modalElement) {
-            const modalInstance = bootstrap.Modal.getInstance(modalElement);
-            modalInstance?.hide();
-          }
+  
         },
         error: (err: any) => {
           console.error('Error creating store:', err);

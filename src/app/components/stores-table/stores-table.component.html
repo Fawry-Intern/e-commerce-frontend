@@ -36,16 +36,13 @@
             <td class="fw-bold">{{ store.name }}</td>
             <td>{{ store.address }}</td>
             <td>
-              <small class="text-muted">ID: {{ store.id }}</small>
+              <small class="text-muted">{{ store.id }}</small>
             </td>
             <td>
               <div class="action-buttons">
                 <button class="btn btn-sm btn-outline-primary me-2" (click)="viewStoreDetails(store)">
                   <i class="fas fa-eye"></i>
                 </button>
-<!--                <button class="btn btn-sm btn-outline-danger" (click)="deleteStore(store)">-->
-<!--                  <i class="fas fa-trash"></i>-->
-<!--                </button>-->
 
               </div>
             </td>
@@ -58,18 +55,28 @@
 </div>
 
 
-<!-- Store Details Modal -->
+
 <div class="modal fade" id="storeDetailsModal" tabindex="-1" aria-labelledby="storeDetailsLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="storeDetailsLabel">Store Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" *ngIf="selectedStore">
-        <p><strong>ID:</strong> {{ selectedStore.id }}</p>
-        <p><strong>Name:</strong> {{ selectedStore.name }}</p>
-        <p><strong>Address:</strong> {{ selectedStore.address }}</p>
+      <div class="modal-body text-center">
+        <div *ngIf="selectedStore">
+          <p><strong>ID: </strong> {{ selectedStore.id }}</p>
+          <p><strong>Name: </strong> {{ selectedStore.name }}</p>
+          <p><strong>Address: </strong> {{ selectedStore.address }}</p>
+          <div class="my-3">
+            <img
+              [src]="selectedStore.imageUrl"
+              alt="{{ selectedStore.name }}"
+              class="img-fluid rounded-3 shadow-lg"
+              style="max-height: 400px; object-fit: cover;"
+            />
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -78,7 +85,7 @@
   </div>
 </div>
 
-<!-- Create Store Modal -->
+
 <div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -96,6 +103,10 @@
           <div class="mb-3">
             <label for="storeAddress" class="form-label">Address</label>
             <input type="text" class="form-control" id="storeAddress" [(ngModel)]="newStore.address" name="storeAddress" />
+          </div>
+          <div class="mb-3">
+            <label for="storeImageUrl" class="form-label">Image Url</label>
+            <textarea class="form-control" id="storeImageUrl" [(ngModel)]="newStore.imageUrl" name="storeImageUrl"></textarea>
           </div>
         </form>
       </div>

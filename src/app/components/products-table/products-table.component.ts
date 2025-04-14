@@ -54,6 +54,7 @@ export class ProductsTableComponent implements OnInit {
       next: (products: AdminProduct[]) => {
         this.products = products;
         this.filteredProducts = products;
+        console.log(this.products);
       },
       error: (err: any) => {
         console.error('Error fetching products:', err);

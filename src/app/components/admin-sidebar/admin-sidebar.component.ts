@@ -23,15 +23,26 @@ export class AdminSidebarComponent {
       this.router.navigate(['/profile',this.userId]);
     }
 
-  viewcoupon() {
+  viewCoupons() {
     this.router.navigate(['/admin/coupon']);
   }
 
-  viewcouponConsumptions() {
+  viewCouponConsumptions() {
     this.router.navigate(['/admin/coupon-consumptions']);
   }
+viewUsers(){
+  this.router.navigate(['/admin/user']);
+}
+viewStores(){
+     this.router.navigate(['/admin/store']);
+}
 
-
+viewProducts(){
+  this.router.navigate(['/admin/product']);
+}
+viewShipping(){
+  this.router.navigate(['/admin/delivery']);
+}
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);

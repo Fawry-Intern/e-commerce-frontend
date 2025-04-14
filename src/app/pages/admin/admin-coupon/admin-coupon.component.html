@@ -66,8 +66,16 @@
         </div>
       </div>
 
-      <!-- Coupon Form Section -->
-      <div class="create-coupon-section mt-5">
+
+      <div class="coupons-table-section mt-5">
+        <div class="section-header">
+          <h2>All Coupons</h2>
+        </div>
+        <app-coupon-table [coupons]="filteredCoupons"></app-coupon-table>
+      </div>
+
+
+       <div class="create-coupon-section mt-5">
         <div class="section-header">
           <h2>Create New Coupon</h2>
         </div>
@@ -113,13 +121,6 @@
         </div>
       </div>
 
-      <!-- Coupons Table Section -->
-      <div class="coupons-table-section mt-5">
-        <div class="section-header">
-          <h2>All Coupons</h2>
-        </div>
-        <app-coupon-table [coupons]="filteredCoupons"></app-coupon-table>
-      </div>
     </div>
   </div>
 </div>

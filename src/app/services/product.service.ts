@@ -23,7 +23,7 @@ export class ProductService {
     });
   }
 
-  // Fetch all products
+ 
   getAllProducts(): Observable<AdminProduct[]> {
     this.updateHeaders();
     return this.httpClient.get<AdminProduct[]>(this.apiUrl, { headers: this.headers }).pipe(
@@ -34,7 +34,6 @@ export class ProductService {
     );
   }
 
-  // Create a new product
   createProduct(product: AdminProduct): Observable<AdminProduct> {
     this.updateHeaders();
     this.createdProduct = {
@@ -61,7 +60,7 @@ export class ProductService {
     );
   }
 
-  // Delete a product by ID
+
   deleteProduct(productId: number): Observable<void> {
     this.updateHeaders();
     return this.httpClient.delete<void>(`${this.apiUrl}/${productId}`, { headers: this.headers }).pipe(
@@ -72,7 +71,7 @@ export class ProductService {
     );
   }
 
-  // Fetch a single product by ID
+ 
   getProductById(productId: number): Observable<AdminProduct> {
     this.updateHeaders();
     return this.httpClient.get<AdminProduct>(`${this.apiUrl}/${productId}`, { headers: this.headers }).pipe(
@@ -83,7 +82,7 @@ export class ProductService {
     );
   }
 
-  // Search products by various criteria (optional)
+
   searchProducts(
     name?: string,
     description?: string,

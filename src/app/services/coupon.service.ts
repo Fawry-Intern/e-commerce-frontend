@@ -29,10 +29,10 @@ export class CouponService {
         catchError((error: HttpErrorResponse) => {
           console.error('Coupon creation failed:', error);
     
-          // Extract error message from backend response
+        
           let errorMessage = 'Coupon creation failed. Please try again.';
           if (error.error && error.error.message) {
-            errorMessage = error.error.message; // Use the backend error message
+            errorMessage = error.error.message; 
           }
     
           return throwError(() => new Error(errorMessage));
