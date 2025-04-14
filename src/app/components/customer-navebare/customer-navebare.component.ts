@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-customer-navebare',
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './customer-navebare.component.html',
-  styleUrl: './customer-navebare.component.css'
+  styleUrls: ['./customer-navebare.component.css']
 })
 export class CustomerNavebareComponent {
   @Output() searchTextChanged = new EventEmitter<string>();

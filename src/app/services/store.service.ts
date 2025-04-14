@@ -35,6 +35,17 @@ export class StoreService {
     );
   }
 
+  getAllStoresForCustomer(): Observable<Store[]> {
+    return this.httpClient.get<Store[]>(
+       `${this.apiUrl}`
+    ).pipe(
+      catchError(() => {
+        console.warn('API failed, using demo stores');
+        return of([]);
+      })
+    );
+  }
+
   createStore(store: AdminStore): Observable<AdminStore> {
     this.updateHeaders();
     this.createdStore = {

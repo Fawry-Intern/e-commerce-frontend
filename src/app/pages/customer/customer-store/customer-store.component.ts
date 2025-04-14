@@ -30,7 +30,7 @@ export class CustomerStoreComponent {
   }
 
   loadStores(): void {
-    this.storeService.getAllStores().subscribe({
+    this.storeService.getAllStoresForCustomer().subscribe({
       next: (response) => {
         this.stores = response;
         console.log('Stores loaded:', this.stores);
@@ -46,11 +46,11 @@ export class CustomerStoreComponent {
     console.log("Search text:", searchText); // Debugging line
     
     if (searchText) {
-      this.stores = this.stores.filter(store =>
+      this.filteredStores = this.stores.filter(store =>
         store.name.toLowerCase().includes(searchText.toLowerCase())
       );
     } else {
-      this.loadStores(); // Reload all stores if search text is empty
+      this.loadStores(); 
     }
   }
 
