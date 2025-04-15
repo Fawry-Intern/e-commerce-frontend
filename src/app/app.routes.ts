@@ -22,6 +22,7 @@ import {AdminProductsStoreComponent} from './pages/admin/admin-products-store/ad
 import { ConsumedCouponsTableComponent } from './pages/admin/admin-consumed-coupon/consumed-coupons-table.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
+import { CustomerOrderComponent } from './pages/customer/customer-order/customer-order.component';
 
 
 export const routes: Routes = [
@@ -84,13 +85,18 @@ export const routes: Routes = [
         canActivate:[AuthGuard,RoleGuard],
         data:{role:'customer'}
     },
-
+    {
+        path:'customer/order',
+        component:CustomerOrderComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'customer'}
+    },
     {path:'customer/stores/:storeId/products',
         component:CustomerProductsComponent,
         canActivate:[AuthGuard,RoleGuard],
         data:{role:'customer'}
     },
-    
+
     {path:'customer/stores',
         component:CustomerStoreComponent,
         canActivate:[AuthGuard,RoleGuard],

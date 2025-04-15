@@ -1,26 +1,46 @@
 <div class="card-wrapper">
   <div class="single-card-wrapper">
     <div class="single-card card-style-1">
-      
-      
-       <div class="card-image">
-        
-          <img [src]="product.imageUrl" alt="{{ product.name }}">
-      
-       </div>
-    
+      <div class="card-image">
+        <img [src]="this.product.imageUrl" alt="{{ this.product.name }}">
+      </div>
 
-      
       <div class="card-content">
-        <h4>{{ product.name }}</h4>
-        <p class="text-muted mb-2">{{ product.description }}</p>
-        <h5 class="text-primary">{{ product.price | currency }}</h5>
+        <h4>{{ this.product.name }}</h4>
+        <p class="text-muted mb-2">{{ this.product.description }}</p>
+        <h5 class="text-primary">{{ this.product.price }} $</h5>
 
-        <button class="btn btn-primary mt-3">
+
+        <button class="btn btn-primary mt-3" [attr.data-bs-target]="'#formModal' + product.id" data-bs-toggle="modal">
           Add to Cart
         </button>
       </div>
+    </div>
+  </div>
+</div>
 
+
+<div class="modal fade" [id]="'formModal' + product.id" tabindex="-1" aria-labelledby="'formModal' + product.id + 'Label'" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content bg-white text-dark rounded shadow">
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="quantity" class="form-label fw-semibold">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="this.cartItem.quantity" required>
+          </div>
+
+          <div class="d-flex justify-content-center mt-4">
+            <button type="button" class="btn btn-success w-100" (click)="addToCart()" data-bs-dismiss="modal">
+              <i class="fas fa-check-circle me-2"></i> Add To Cart
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer border-top">
+        <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

@@ -4,12 +4,14 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { CreateCouponRequest } from '../dtos/coupons/create-coupon-request';
 import { Coupon } from '../models/coupon/coupon.model';
 import { ConsumedCoupon } from '../models/coupon/consumption.model';
+import { environment } from '../../environments/environment';
+import { DiscountDetails } from '../dtos/coupons/discount-details';
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
-  private apiUrl = 'http://localhost:1111/api/coupons';
-  private consumptionUrl = 'http://localhost:1111/api/consumptions';
+  private apiUrl = `${environment.apiUrl}/coupons`;
+  private consumptionUrl = `${environment.apiUrl}/consumptions`;
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -88,6 +90,17 @@ export class CouponService {
                 throw error;
             })
         );
+    }
+
+    checkCoupon(couponCode:String,amount:Number):Observable<DiscountDetails>{
+this.updateHeaders();
+return this.http.get<DiscountDetails>(`${this.apiUrl}/check/${couponCode}?amount=${amount}`, { headers: this.headers }).pipe(
+    catchError((error) => {
+        console.error('checking coupon failed:', error);
+        throw error;
+    })
+);
+
     }
 
 }

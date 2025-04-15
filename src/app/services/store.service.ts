@@ -66,9 +66,9 @@ export class StoreService {
       })
     );
   }
-  getProductsByStoreId(storeId: number,page: number , size: number): Observable<Page<Product[]>> {
+  getProductsByStoreId(storeId: number,page: number , size: number): Observable<Page<Product>> {
     this.updateHeaders();
-    return this.httpClient.get<Page<Product[]>>(`${this.apiUrl}/${storeId}/products?page=${page}&size=${size}`,{headers: this.headers}).pipe(
+    return this.httpClient.get<Page<Product>>(`${this.apiUrl}/${storeId}/products?page=${page}&size=${size}`,{headers: this.headers}).pipe(
         catchError((error) => {
           console.error(`Error fetching products for store with id ${storeId}:`, error);
           return throwError(error);

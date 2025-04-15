@@ -1,16 +1,8 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <header class="header py-3 bg-white shadow-sm sticky-top">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
 
-    <!-- Logo -->
-    <div class="d-flex align-items-center me-4">
-      <a href="#">
-        <img src="logo.png" alt="Logo" height="40" />
-      </a>
-    </div>
 
-    <!-- Search Bar -->
     <div class="flex-grow-1 mx-3">
       <form 
         class="position-relative" 
@@ -37,10 +29,9 @@
     </div>
 
 
-    <!-- Right Side -->
     <div class="d-flex align-items-center">
-      <!-- Cart -->
-      <button class="btn me-3" title="Cart">
+
+      <button class="btn me-3" title="Cart" [routerLink]="['/customer/order']">
         <i class="fas fa-shopping-cart"></i>
       </button>
 
@@ -71,6 +62,11 @@
           <li>
             <a class="dropdown-item" [routerLink]="['/customer/stores']">
               <i class="fas fa-store me-2"></i>Stores
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/customer/order']">
+                <i class="fas fa-shopping-cart me-2"></i> Cart
             </a>
           </li>
       

@@ -1,16 +1,16 @@
 import { Component } from "@angular/core";
 import { CardProductComponent } from "../../../components/card-product/card-product.component";
-import { CustomerNavebareComponent } from "../../../components/customer-navebare/customer-navebare.component";
-import { CustomerSidebarComponent } from "../../../components/customer-sidebar/customer-sidebar.component";
-import { CustomerProductNavbarComponent } from "../../../components/customer-product-navbar/customer-product-navbar.component";
 import { CommonModule } from "@angular/common";
 import { Product } from "../../../models/product/product.model";
 import { StoreService } from "../../../services/store.service";
 import { ActivatedRoute } from "@angular/router";
+import { CustomerNavebareComponent } from "../../../components/customer-navebare/customer-navebare.component";
+import { FormsModule } from "@angular/forms";
+import { CustomerProductNavbarComponent } from "../../../components/customer-product-navbar/customer-product-navbar.component";
 
 @Component({
   selector: 'app-customer-products',
-  imports: [CommonModule,CustomerProductNavbarComponent, CardProductComponent],
+  imports: [CommonModule, CardProductComponent, CustomerNavebareComponent, FormsModule, CustomerProductNavbarComponent],
   templateUrl: './customer-products.component.html',
   styleUrls: ['./customer-products.component.css'],
 })
@@ -29,7 +29,7 @@ export class CustomerProductsComponent {
     this.activatedRoute.paramMap.subscribe(params => {
       const idParam = params.get('storeId');
       if (idParam) {
-        this.storeId = +idParam; // convert to number
+        this.storeId = +idParam;
         console.log('Store ID:', this.storeId);
         this.loadProducts();
       }
@@ -42,11 +42,13 @@ export class CustomerProductsComponent {
     
     this.storeService.getProductsByStoreId(this.storeId,this.currentPage, this.pageSize).subscribe({
       next: (response) => {
+        console.log(response);
       this.products = [...this.products, ...(Array.isArray(response.content) ? response.content : [response.content]).flat()];
+      console.log(this.products,'from test');
       this.totalPages = response.totalPages;
       this.currentPage = response.number;
       this.filteredProducts = this.products;
-      console.log('Products loaded:', this.products);
+      console.log('filtered Products loaded:', this.filteredProducts);
       },
       error: (error) => { 
       console.error('Error loading products:', error);

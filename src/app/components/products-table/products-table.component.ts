@@ -4,16 +4,14 @@ import { AdminProduct } from '../../dtos/product/admin-product.model';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { ProductService } from '../../services/product.service';
-import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf,
-    NgForOf,
-    NgOptimizedImage
+    CommonModule
   ],
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.css']

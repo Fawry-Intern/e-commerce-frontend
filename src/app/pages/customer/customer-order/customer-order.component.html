@@ -1,0 +1,95 @@
+<div class="container my-5">
+  <div class="row">
+    <!-- Cart Items -->
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-white text-center" style="background-color: rgb(104 160 209);">
+          <h4 class="mb-0" style="color: white;">Your Cart</h4>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let item of cartItems" class="d-flex align-items-center mb-4 border-bottom pb-3">
+            <img [src]="item.imageUrl" alt="Product" class="img-thumbnail me-3" style="width: 100px; height: auto;" />
+            <div>
+              <p class="mb-1 text-dark"><strong>Product ID:</strong> {{ item.productId }}</p>
+              <p class="mb-1 text-muted"><strong>Quantity:</strong> {{ item.quantity }}</p>
+              <p class="mb-1 text-success"><strong>Price:</strong> {{ item.price }} $</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Form -->
+    <div class="col-md-6">
+      <div class="card shadow-sm mt-4 mt-md-0">
+        <div class="card-header  text-center" style="background-color: rgb(104 160 209);">
+          <h4 class="mb-0"style="color: white;">Order Summary</h4>
+        </div>
+        <div class="card-body">
+          <form #customerForm="ngForm" >
+            <h5 class="mb-3 text-primary">Customer Info</h5>
+            <div class="mb-3">
+              <input type="text" name="customerName" [(ngModel)]="order.customerName" class="form-control" placeholder="Full Name" required />
+            </div>
+            <div class="mb-3">
+              <input type="text" name="customerContact" [(ngModel)]="order.customerContact" class="form-control" placeholder="Phone" required />
+            </div>
+
+            <h5 class="mb-3 text-primary">Address Details</h5>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" name="governorate" [(ngModel)]="order.addressDetails.governorate" class="form-control" placeholder="Governorate" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" name="city" [(ngModel)]="order.addressDetails.city" class="form-control" placeholder="City" required />
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="address" [(ngModel)]="order.addressDetails.address" class="form-control" placeholder="Street Address" required />
+            </div>
+
+            <h5 class="mb-3 text-primary">Payment Details</h5>
+            <div class="mb-3">
+              <input type="text" name="cardNumber" [(ngModel)]="order.paymentMethod.details.number" class="form-control" placeholder="Card Number" required />
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" name="cvv" [(ngModel)]="order.paymentMethod.details.cvv" class="form-control" placeholder="CVV" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" name="expiry" [(ngModel)]="order.paymentMethod.details.expiry" class="form-control" placeholder="Expiry (MM/YY)" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <p class="fs-5"><strong>Total Price: {{ order.totalAmount }} $</strong></p>
+            </div>
+
+            <div class="mb-3">
+              <label for="coupon" class="form-label">Coupon Code:</label>
+              <input
+                type="text"
+                id="coupon"
+                class="form-control"
+                [(ngModel)]="order.couponCode"
+                name="couponCode"
+                
+                placeholder="Enter coupon"
+              />
+              <button type="submit" (click)="applyDiscount()" class="btn btn-warning" style="margin-top:10px ">
+                Try Coupon
+            </button>
+            </div>
+            
+
+            <p class="fs-5"><strong>After Discount: {{ this.order.totalAmount-this.discount }} $</strong></p>
+
+            <button type="submit" (click)="submitOrder()" class="btn btn-primary w-100 mt-3" [disabled]="!customerForm.valid">
+              Submit Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

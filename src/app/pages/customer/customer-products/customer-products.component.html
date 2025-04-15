@@ -1,10 +1,11 @@
+
 <app-customer-product-navbar (searchTextChanged)="handleSearch($event)"></app-customer-product-navbar>
 
 
 <div class="container mt-4">    
   <div class="product-grid">
-    <div class="product-column" *ngFor="let product of filteredProducts">
-      <app-card-product [product]="product"></app-card-product>
+    <div class="product-column" *ngFor="let product of this.filteredProducts">
+      <app-card-product [product]="product" [storeId]="storeId"></app-card-product>
     </div>
   </div>
 </div>

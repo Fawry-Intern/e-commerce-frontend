@@ -45,10 +45,16 @@
     </div>
 
 
-    <!-- Right Side -->
+    
     <div class="d-flex align-items-center">
-      <!-- Profile -->
+     <div>
+     <a [routerLink]="['/customer/order']">
+      <span class="fa fa-shopping-cart"></span>
+     </a> 
+     </div>
+     
       <div class="dropdown">
+
         <button 
           class="btn dropdown-toggle d-flex align-items-center" 
           data-bs-toggle="dropdown" 
@@ -61,6 +67,7 @@
         <strong>Account & Lists</strong>
           </div>
         </button>
+
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
             <a 
@@ -78,6 +85,13 @@
           <span>Stores</span>
         </a>
           </li>
+          
+          <li class="dropdown-item">
+            <a class="d-flex align-items-center text-black" [routerLink]="['/customer/order']">
+              <i class="fas fa-shopping-cart me-2"></i>
+              <span>Cart</span>
+            </a>
+          </li>
 
           <ng-container *ngIf="isLoggedIn; else loginTemplate">
         <li>
@@ -94,7 +108,7 @@
           </a>
         </li>
           </ng-template>
-
+         
         </ul>
       </div>
       </div>
