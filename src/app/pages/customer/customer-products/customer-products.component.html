@@ -1,10 +1,17 @@
 <app-customer-product-navbar (searchTextChanged)="handleSearch($event)"></app-customer-product-navbar>
 
-
-<div class="container mt-4">    
+<div class="product-grid-container" #list (scroll)="onScroll($event)">
   <div class="product-grid">
-    <div class="product-column" *ngFor="let product of filteredProducts">
-      <app-card-product [product]="product"></app-card-product>
-    </div>
+    <ng-container *ngFor="let product of filteredProducts; trackBy: trackByFn">
+      <div class="product-column">
+        <app-card-product [product]="product"></app-card-product>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+      <p class="loading-text" style="text-align: center; font-size: 1.2rem; color: gray; margin-top: 20px;">
+      Loading...
+      </p>
+    </ng-container>
   </div>
 </div>
