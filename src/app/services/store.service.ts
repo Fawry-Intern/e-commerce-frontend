@@ -5,6 +5,7 @@ import { Product } from '../models/product/product.model';
 import { Store } from '../models/store/store.model';
 import { AdminStore } from '../dtos/store/admin-store.model';
 import {catchError, Observable, of, throwError} from "rxjs";
+import { Page } from '../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class StoreService {
   }
 
   getAllStoresForCustomer(): Observable<Store[]> {
+    this.updateHeaders();
     return this.httpClient.get<Store[]>(
-       `${this.apiUrl}`
-    ).pipe(
+       `${this.apiUrl}`, {headers: this.headers}).pipe(
       catchError(() => {
         console.warn('API failed, using demo stores');
         return of([]);
@@ -65,9 +66,9 @@ export class StoreService {
       })
     );
   }
-  getProductsByStoreId(storeId: number): Observable<Product[]> {
+  getProductsByStoreId(storeId: number,page: number , size: number): Observable<Page<Product[]>> {
     this.updateHeaders();
-    return this.httpClient.get<Product[]>(`${this.apiUrl}/${storeId}/products`, { headers: this.headers }).pipe(
+    return this.httpClient.get<Page<Product[]>>(`${this.apiUrl}/${storeId}/products?page=${page}&size=${size}`,{headers: this.headers}).pipe(
         catchError((error) => {
           console.error(`Error fetching products for store with id ${storeId}:`, error);
           return throwError(error);
