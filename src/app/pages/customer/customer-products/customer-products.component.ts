@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-customer-products',
-  imports: [CommonModule,CustomerProductNavbarComponent, CustomerNavebareComponent, CardProductComponent],
+  imports: [CommonModule,CustomerProductNavbarComponent, CardProductComponent],
   templateUrl: './customer-products.component.html',
   styleUrls: ['./customer-products.component.css'],
 })
@@ -19,6 +19,9 @@ export class CustomerProductsComponent {
   filteredProducts = this.products;
   error: string | null = null;
   storeId: number = 0;
+  currentPage = -1;
+  totalPages = 0;
+  pageSize = 10;
 
   constructor(private storeService: StoreService, private activatedRoute: ActivatedRoute) {}
 
@@ -35,11 +38,13 @@ export class CustomerProductsComponent {
 
   loadProducts(): void {
     this.error = null;
+    this.nextPage();
     
-    
-    this.storeService.getProductsByStoreId(this.storeId).subscribe({
+    this.storeService.getProductsByStoreId(this.storeId,this.currentPage, this.pageSize).subscribe({
       next: (response) => {
-      this.products = response;
+      this.products = [...this.products, ...(Array.isArray(response.content) ? response.content : [response.content]).flat()];
+      this.totalPages = response.totalPages;
+      this.currentPage = response.number;
       this.filteredProducts = this.products;
       console.log('Products loaded:', this.products);
       },
@@ -48,6 +53,13 @@ export class CustomerProductsComponent {
       this.error = 'Failed to load products. Please try again.';
       }
     });
+  }
+  
+  nextPage(): Number {
+   
+    this.currentPage++;
+    return this.currentPage ;
+  
   }
 
   handleSearch(searchText: string) {
