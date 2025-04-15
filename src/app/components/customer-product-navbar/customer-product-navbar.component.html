@@ -45,10 +45,11 @@
       </button>
 
       
-      <div ngbDropdown class="dropdown">
+      <div class="dropdown">
         <button 
           class="btn dropdown-toggle d-flex align-items-center" 
-          ngbDropdownToggle>
+          data-bs-toggle="dropdown" 
+          aria-expanded="false">
           <div class="text-start d-none d-md-block">
             <p *ngIf="isLoggedIn; else guestTemplate" class="mb-0 small">Hello, {{ userFirstName }}</p>
             <ng-template #guestTemplate>
@@ -57,18 +58,39 @@
             <strong>Account & Lists</strong>
           </div>
         </button>
-        
-        <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" [routerLink]="['/profile', userId]"><i class="fas fa-user me-2"></i>Your Account</a></li>
-          <li><a class="dropdown-item" [routerLink]="['/customer/stores']"><i class="fas fa-store me-2"></i>Stores</a></li>
-          <li *ngIf="isLoggedIn">
-            <a class="dropdown-item" (click)="onSignOut()"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
+      
+        <ul class="dropdown-menu dropdown-menu-end">
+            <ng-container *ngIf="isLoggedIn">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/profile', userId]">
+              <i class="fas fa-user me-2"></i>Your Account
+              </a>
+            </li>
+            </ng-container>
+      
+          <li>
+            <a class="dropdown-item" [routerLink]="['/customer/stores']">
+              <i class="fas fa-store me-2"></i>Stores
+            </a>
           </li>
+      
+          <ng-container *ngIf="isLoggedIn; else loginTemplate">
+            <li>
+              <a class="dropdown-item" (click)="onSignOut()">
+                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+              </a>
+            </li>
+          </ng-container>
+      
           <ng-template #loginTemplate>
-            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+            <li>
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+              </a>
+            </li>
           </ng-template>
         </ul>
-      </div>      
+      </div>            
       </div>
     </div>
 
