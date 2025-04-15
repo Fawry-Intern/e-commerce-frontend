@@ -20,24 +20,88 @@ import { HomeComponent } from './pages/home/home.component';
 import {AdminProductComponent} from './pages/admin/admin-product/admin-product.component';
 import {AdminProductsStoreComponent} from './pages/admin/admin-products-store/admin-products-store.component';
 import { ConsumedCouponsTableComponent } from './pages/admin/admin-consumed-coupon/consumed-coupons-table.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 
 export const routes: Routes = [
 
-    {path:'admin/users',component:AdminUserComponent},
-    {path:'admin/delivery',component:AdminDeliveryComponent},
-    {path:'admin/user',component:AdminUserComponent},
-    {path:'admin/store',component:AdminStoreComponent},
-    {path:'admin/store/:id',component:AdminProductsStoreComponent},
-    {path:'admin/product', component:AdminProductComponent},
-    {path:'admin/coupon', component: AdminCouponComponent},
-    {path: 'admin/coupon-consumptions', component: ConsumedCouponsTableComponent},
-    {path:'delivery-person/dashboard',component:DeliveryPersonDashboardComponent},
-    {path:'customer/order-tracking',component:CustomerDeliveryComponent},
-    {path:'customer/stores/:storeId/products',component:CustomerProductsComponent},
-    {path:'customer/stores',component:CustomerStoreComponent},
-     {path:'home', component:HomeComponent},
-     {path:'profile/:id',component:ProfileComponent},
+    {path:'admin/users',
+    component:AdminUserComponent,
+     canActivate:[AuthGuard,RoleGuard],
+    data:{role:'admin'}
+    },
+
+    {path:'admin/delivery',
+    component:AdminDeliveryComponent,
+    canActivate:[AuthGuard,RoleGuard],
+    data:{role:'admin'}
+     },
+
+    {path:'admin/user',
+        component:AdminUserComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+    {path:'admin/store',
+        component:AdminStoreComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+
+    {path:'admin/store/:id',
+        component:AdminProductsStoreComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+
+    {path:'admin/product', 
+        component:AdminProductComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+
+    {path:'admin/coupon', 
+        component: AdminCouponComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+
+    {path: 'admin/coupon-consumptions', 
+        component: ConsumedCouponsTableComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'admin'}
+    },
+
+    {path:'delivery-person/dashboard',
+        component:DeliveryPersonDashboardComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'delivery'}
+    },
+
+    {path:'customer/order-tracking',
+        component:CustomerDeliveryComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'customer'}
+    },
+
+    {path:'customer/stores/:storeId/products',
+        component:CustomerProductsComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'customer'}
+    },
+    
+    {path:'customer/stores',
+        component:CustomerStoreComponent,
+        canActivate:[AuthGuard,RoleGuard],
+        data:{role:'customer'}
+    },
+     
+    {path:'profile/:id',
+        component:ProfileComponent,
+        canActivate:[AuthGuard]
+    },
+
     {path:'login',component:LoginComponent},
     {path:'sign-up',component:SignUpComponent},
     { path: 'forgot-password', component: ForgotPasswordComponent },

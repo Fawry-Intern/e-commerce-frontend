@@ -30,7 +30,7 @@ export class CustomerStoreComponent {
   }
 
   loadStores(): void {
-    this.storeService.getAllStoresForCustomer().subscribe({
+    this.storeService.getAllStores().subscribe({
       next: (response) => {
         this.stores = response;
         console.log('Stores loaded:', this.stores);
