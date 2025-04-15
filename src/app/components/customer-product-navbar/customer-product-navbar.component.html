@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <header class="header py-3 bg-white shadow-sm sticky-top">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
 
@@ -42,52 +44,31 @@
         <i class="fas fa-shopping-cart"></i>
       </button>
 
-      <!-- Profile -->
-      <div class="dropdown">
+      
+      <div ngbDropdown class="dropdown">
         <button 
           class="btn dropdown-toggle d-flex align-items-center" 
-          data-bs-toggle="dropdown" 
-          aria-expanded="false">
+          ngbDropdownToggle>
           <div class="text-start d-none d-md-block">
-        <p *ngIf="isLoggedIn; else guestTemplate" class="mb-0 small">Hello, {{ userFirstName }}</p>
-        <ng-template #guestTemplate>
-          <p class="mb-0 small">Hello, User</p>
-        </ng-template>
-        <strong>Account & Lists</strong>
+            <p *ngIf="isLoggedIn; else guestTemplate" class="mb-0 small">Hello, {{ userFirstName }}</p>
+            <ng-template #guestTemplate>
+              <p class="mb-0 small">Hello, User</p>
+            </ng-template>
+            <strong>Account & Lists</strong>
           </div>
         </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-            <a class="dropdown-item" [routerLink]="['/profile', userId]" routerLinkActive="active">
-              <i class="fas fa-user me-2"></i>Your Account
-            </a>
-            </li>
-
-          <li class="dropdown-item">
-        <a class="d-flex align-items-center text-black" [routerLink]="['/customer/stores']" routerLinkActive="active">
-          <i class="fas fa-store me-2"></i>
-          <span>Stores</span>
-        </a>
+        
+        <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" [routerLink]="['/profile', userId]"><i class="fas fa-user me-2"></i>Your Account</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/customer/stores']"><i class="fas fa-store me-2"></i>Stores</a></li>
+          <li *ngIf="isLoggedIn">
+            <a class="dropdown-item" (click)="onSignOut()"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
           </li>
-
-          <ng-container *ngIf="isLoggedIn; else loginTemplate">
-        <li>
-          <a class="dropdown-item" (click)="onSignOut()">
-            <i class="fas fa-sign-out-alt me-2"></i>Sign Out
-          </a>
-        </li>
-          </ng-container>
-
           <ng-template #loginTemplate>
-        <li>
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-sign-in-alt me-2"></i>Login
-          </a>
-        </li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
           </ng-template>
-
         </ul>
-      </div>
+      </div>      
       </div>
     </div>
 

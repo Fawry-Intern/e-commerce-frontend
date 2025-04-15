@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-customer-products',
-  imports: [CommonModule,CustomerProductNavbarComponent, CustomerNavebareComponent, CardProductComponent],
+  imports: [CommonModule,CustomerProductNavbarComponent, CardProductComponent],
   templateUrl: './customer-products.component.html',
   styleUrls: ['./customer-products.component.css'],
 })
