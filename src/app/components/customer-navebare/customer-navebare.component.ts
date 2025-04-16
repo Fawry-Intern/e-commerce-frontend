@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -15,7 +15,8 @@ export class CustomerNavebareComponent {
   userFirstName: string | null = null;
   isLoggedIn: boolean = false;
   userId: number = 0;
-  constructor(private authService: AuthService, private router: Router) {} 
+  @Input() hideSearch: boolean = false;
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();

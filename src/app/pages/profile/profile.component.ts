@@ -10,9 +10,11 @@ import { AdminUserComponent } from '../admin/admin-user/admin-user.component';
 import { PasswordChangeRequest } from '../../dtos/user/password-change-request.model';
 import { CustomerNavebareComponent } from '../../components/customer-navebare/customer-navebare.component';
 import { UserRole } from '../../enums/user-role.model';
+import {CustomerSidebarComponent} from '../../components/customer-sidebar/customer-sidebar.component';
+import {DeliverySidebarComponent} from '../../components/delivery-sidebar/delivery-sidebar.component';
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,FormsModule,AdminSidebarComponent,AdminUserComponent,CustomerNavebareComponent ],
+  imports: [CommonModule, FormsModule, AdminSidebarComponent, CustomerNavebareComponent, DeliverySidebarComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -25,7 +27,7 @@ export class ProfileComponent {
   passwordChangeRequest: PasswordChangeRequest = { oldPassword: '', newPassword: '' };
   constructor(private route:ActivatedRoute,private userService:UserService, private router: Router)
     {
-  
+
     }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class ProfileComponent {
     });
   }
 
- 
+
   fetchProfileData()
   {
       this.userService.getUserProfile(this.userId).subscribe((response)=>{
@@ -47,7 +49,7 @@ export class ProfileComponent {
 
   onSaveChanges(){
 
-    
+
     this.userService.changeUserPassword(this.passwordChangeRequest).subscribe((data)=>{
       console.log(data);
     })
@@ -64,21 +66,15 @@ export class ProfileComponent {
   }
 
 
-isAdmin():Boolean
-{
-  
-return localStorage.getItem('role')!=='ADMIN'
-}
-isDelivery():Boolean
-{
-  
-return localStorage.getItem('role')!=='DELIVERY'
-}
+  isAdmin():Boolean {
+    return localStorage.getItem('role')==='ADMIN'
+  }
+  isDelivery():Boolean {
+    return localStorage.getItem('role')==='DELIVERY'
+  }
 
-isCustomer():Boolean
-{
-  
-return localStorage.getItem('role')!=='CUSTOMER'
-}
- 
+  isCustomer():Boolean {
+    console.log(localStorage.getItem('role'))
+    return localStorage.getItem('role')==='customer'
+  }
 }
