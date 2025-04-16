@@ -11,7 +11,7 @@ import { OrderItem } from "../dtos/orders/order-item.model";
 export class OrderService{
     
     private readonly CART_KEY = 'shopping_cart';
-    private apiUrl = `${environment.apiUrl}/v1/orders`;
+    private apiUrl = `${environment.apiUrl}/orders`;
     private headers: HttpHeaders = new HttpHeaders();
 
     constructor(private httpClient: HttpClient) {

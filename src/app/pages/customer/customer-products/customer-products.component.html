@@ -4,7 +4,7 @@
   <div class="product-grid">
     <ng-container *ngFor="let product of filteredProducts; trackBy: trackByFn">
       <div class="product-column">
-        <app-card-product [product]="product"></app-card-product>
+        <app-card-product [product]="product" [storeId]="storeId"></app-card-product>
       </div>
     </ng-container>
 
