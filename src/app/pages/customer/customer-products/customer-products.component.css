@@ -6,11 +6,26 @@
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 15px;
+    gap: 20px;
   }
   
   .product-column {
     display: flex;
     justify-content: center;
   }
+  .product-grid-container {
+    height: 700px;
+    overflow-y: auto;
+    padding-right: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
   
+ 
+  .ul {
+    border: 1px solid black;
+    min-height: 20rem;
+    max-height: 20rem;
+    overflow-y: auto;
+  }

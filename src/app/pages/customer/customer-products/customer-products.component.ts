@@ -15,65 +15,89 @@ import { CustomerProductNavbarComponent } from "../../../components/customer-pro
   styleUrls: ['./customer-products.component.css'],
 })
 export class CustomerProductsComponent {
-  products : Product[] = [];
-  filteredProducts = this.products;
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   error: string | null = null;
   storeId: number = 0;
   currentPage = -1;
   totalPages = 0;
   pageSize = 10;
+  isLoading = false;
+  searchQuery: string = '';
 
-  constructor(private storeService: StoreService, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private storeService: StoreService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       const idParam = params.get('storeId');
       if (idParam) {
         this.storeId = +idParam;
-        console.log('Store ID:', this.storeId);
+        console.log(this.storeId);
+
         this.loadProducts();
       }
     });
   }
 
   loadProducts(): void {
-    this.error = null;
-    this.nextPage();
-    
-    this.storeService.getProductsByStoreId(this.storeId,this.currentPage, this.pageSize).subscribe({
+    if (this.isLoading) return;
+    console.log(this.currentPage + 1 >= this.totalPages);
+
+    this.isLoading = true;
+    this.currentPage++;
+
+    this.storeService.getProductsByStoreId(this.storeId, this.currentPage, this.pageSize).subscribe({
       next: (response) => {
-        console.log(response);
-      this.products = [...this.products, ...(Array.isArray(response.content) ? response.content : [response.content]).flat()];
-      console.log(this.products,'from test');
-      this.totalPages = response.totalPages;
-      this.currentPage = response.number;
-      this.filteredProducts = this.products;
-      console.log('filtered Products loaded:', this.filteredProducts);
+        const newProducts = Array.isArray(response.content) ? response.content : [response.content];
+        this.products = [...this.products, ...newProducts.flat()];
+        this.totalPages = response.totalPages;
+        this.handleAppendedProductsToFilteredProducts(newProducts);
+        this.isLoading = false;
       },
-      error: (error) => { 
-      console.error('Error loading products:', error);
-      this.error = 'Failed to load products. Please try again.';
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.error = 'Failed to load products. Please try again.';
+        this.isLoading = false;
       }
     });
-  }
-  
-  nextPage(): Number {
-   
-    this.currentPage++;
-    return this.currentPage ;
-  
-  }
+    console.log(this.filterProducts);
 
-  handleSearch(searchText: string) {
-    console.log("Search text:", searchText); // Debugging line
-    
-    if (searchText) {
-      this.filteredProducts = this.products.filter(product =>
-        product.name.toLowerCase().includes(searchText.toLowerCase())
+
+  }
+  handleAppendedProductsToFilteredProducts(newProducts: Product[][]) {
+    if (this.searchQuery) {
+      const newFilteredProducts = newProducts.flat().filter(product =>
+        product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+      this.filteredProducts = [...this.filteredProducts, ...newFilteredProducts];
     } else {
-      this.filteredProducts = this.products;
+      this.filteredProducts = [...this.products];
     }
   }
-  
+
+  onScroll(event: any): void {
+    const element = event.target;
+    if (event.deltaY > 0 && element.scrollHeight - element.scrollTop <= element.clientHeight + 100) {
+      this.loadProducts();
+    }
+  }
+
+  handleSearch(searchText: string): void {
+    this.searchQuery = searchText;
+    this.filteredProducts = this.filterProducts(searchText);
+  }
+
+  private filterProducts(query: string): Product[] {
+    if (!query) return this.products;
+    return this.products.filter(product =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  trackByFn(index: number, item: Product) {
+    return item.id;
+  }
 }
