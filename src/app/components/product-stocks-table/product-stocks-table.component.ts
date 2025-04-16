@@ -4,7 +4,7 @@ import { ProductStockService } from '../../services/productStock.service';
 import { Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { FormsModule } from '@angular/forms';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product/product.model';
 
@@ -14,7 +14,6 @@ import {Product} from '../../models/product/product.model';
   imports: [
     FormsModule,
     CommonModule,
-    NgOptimizedImage,
   ],
   templateUrl: './product-stocks-table.component.html',
   styleUrl: './product-stocks-table.component.css'

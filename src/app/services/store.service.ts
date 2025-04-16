@@ -13,7 +13,7 @@ import { Page } from '../models/page.model';
 export class StoreService {
   private apiUrl = `${environment.apiUrl}/stores`;
   private headers: HttpHeaders = new HttpHeaders();
-  private createdStore: { name: string; address: string; } | undefined;
+  private createdStore: { } | undefined;
 
   constructor(private httpClient: HttpClient) {
     this.updateHeaders();
@@ -49,8 +49,14 @@ export class StoreService {
 
   createStore(store: AdminStore): Observable<AdminStore> {
     this.updateHeaders();
+    this.createdStore = {
+      name: store.name,
+      address: store.address,
+      imageUrl: store.imageUrl
+    };
 
-    return this.httpClient.post<AdminStore>(this.apiUrl, store, { headers: this.headers }).pipe(
+    console.log(this.createdStore);
+    return this.httpClient.post<AdminStore>(this.apiUrl, this.createdStore, { headers: this.headers }).pipe(
       catchError((error) => {
         return throwError(error);
       })

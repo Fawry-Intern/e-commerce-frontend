@@ -53,6 +53,7 @@ export class ProductStockService {
       storeId: stock.storeId,
       stockAvailableQuantity: stock.stockAvailableQuantity
     };
+    console.log(this.createdStock);
     return this.httpClient.post<ProductStock>(this.apiUrl, this.createdStock, { headers: this.headers }).pipe(
       catchError((error) => {
         console.error('Error creating stock:', error);

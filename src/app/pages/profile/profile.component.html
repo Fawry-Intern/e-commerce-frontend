@@ -1,14 +1,11 @@
+@if (isAdmin()) {
+  <app-admin-sidebar></app-admin-sidebar>
+} @else if (isCustomer()){
+  <app-customer-navebare [hideSearch]="true"></app-customer-navebare>
+} @else if (isDelivery()){
+  <app-delivery-sidebar></app-delivery-sidebar>
+}
 <div class="d-flex">
-
-
-
-
-  @if (isAdmin())
-  {
-      <app-admin-sidebar></app-admin-sidebar>
-  }
-
- 
   <div class="container mt-5">
       <div class="profile-card">
           <div class="profile-header">
@@ -21,9 +18,9 @@
               </div>
               <h2>{{user?.firstName}} {{user?.lastName}}</h2>
           </div>
-          
+
           <div class="profile-content">
-              
+
               <div class="info-section">
                   <div class="d-flex justify-content-end mb-3">
                       <button class="btn btn-primary fw-bold edit-profile d-flex align-items-center gap-2"
@@ -31,7 +28,7 @@
                           <i class="fas fa-key"></i> Change Password
                       </button>
                   </div>
-                  
+
                   <div class="info-group">
                       <i class="fas fa-envelope"></i>
                       <div class="info-details">
@@ -47,16 +44,16 @@
                       </div>
                   </div>
 
-                  
-                 
-              
+
+
+
               </div>
           </div>
       </div>
   </div>
 </div>
 <div class="modal fade" id="formModal1" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm"> 
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header border-secondary">
         <h5 class="modal-title" id="formModalLabel">Edit Profile</h5>
@@ -67,27 +64,27 @@
         <form>
           <div class="mb-3">
             <label for="oldPassword" class="form-label">Enter your old password</label>
-            <input 
-              type="password" 
-              class="form-control bg-secondary text-white border-0" 
-              id="oldPassword" 
-              name="oldPassword" 
-              [(ngModel)]="passwordChangeRequest.oldPassword" 
-              required>
-          </div>
-          
-          <div class="mb-3">
-            <label for="newPassword" class="form-label">Enter your new password</label>
-            <input 
-              type="password" 
-              class="form-control bg-secondary text-white border-0" 
-              id="newPassword" 
-              name="newPassword" 
-              [(ngModel)]="passwordChangeRequest.newPassword" 
+            <input
+              type="password"
+              class="form-control bg-secondary text-white border-0"
+              id="oldPassword"
+              name="oldPassword"
+              [(ngModel)]="passwordChangeRequest.oldPassword"
               required>
           </div>
 
-          <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center" 
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">Enter your new password</label>
+            <input
+              type="password"
+              class="form-control bg-secondary text-white border-0"
+              id="newPassword"
+              name="newPassword"
+              [(ngModel)]="passwordChangeRequest.newPassword"
+              required>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center"
                   data-bs-dismiss="modal" (click)="onSaveChanges()">
             <i class="fas fa-save me-2"></i> Save Changes
           </button>

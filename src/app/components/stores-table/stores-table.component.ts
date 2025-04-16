@@ -36,10 +36,11 @@ export class StoresTableComponent implements OnInit {
     this.fetchStores();
   }
 
- 
+
   fetchStores(): void {
     this.storeService.getAllStores().subscribe({
       next: (stores: AdminStore[]) => {
+        console.log(stores);
         this.stores = stores;
         this.filteredStores = stores;
       },
@@ -76,7 +77,7 @@ export class StoresTableComponent implements OnInit {
   }
 
 
- 
+
 
   createStore(): void {
     this.newStore = { id: 0, name: '', address: '',imageUrl:'' };
@@ -90,13 +91,13 @@ export class StoresTableComponent implements OnInit {
 
   addStore(): void {
     if (this.newStore.name.trim() && this.newStore.address.trim()) {
-      console.log(this.newStore);
       this.storeService.createStore(this.newStore).subscribe({
         next: (createdStore: AdminStore) => {
+          console.log(createdStore);
           this.stores.push(createdStore);
           this.filterStores();
 
-  
+
         },
         error: (err: any) => {
           console.error('Error creating store:', err);
