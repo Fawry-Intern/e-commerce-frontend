@@ -67,7 +67,7 @@ export class ProfileComponent {
 
 
   isAdmin():Boolean {
-    return localStorage.getItem('role')==='ADMIN'
+    return localStorage.getItem('role')==='admin'
   }
   isDelivery():Boolean {
     return localStorage.getItem('role')==='DELIVERY'

@@ -1,25 +1,37 @@
 
 <header class="header py-3 bg-white shadow-sm sticky-top">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
-
+    <div class="d-flex align-items-center me-4">
+      <a href="#" class="d-flex align-items-center text-decoration-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-cart4 me-2" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1
+               .49.598l-1.5 7A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.491-.408L1.01 2H.5a.5.5
+               0 0 1-.5-.5zM3.14 4l1.25 6h8.223l1.286-6H3.14z"/>
+          <path d="M5.5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0
+               2 2 0 0 1-4 0zm8-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0
+               1 1 4 0 2 2 0 0 1-4 0z"/>
+        </svg>
+        <span class="fs-5 fw-bold text-primary">ShopEase</span>
+      </a>
+    </div>
 
     <div class="flex-grow-1 mx-3">
-      <form 
-        class="position-relative" 
+      <form
+        class="position-relative"
         (ngSubmit)="onSearch(searchInput.value)">
-        
+
         <input
             #searchInput
             type="text"
-            name="search"             
-            id="searchInput"           
+            name="search"
+            id="searchInput"
             class="form-control ps-5"
             placeholder="Search product..."
             style="height: 48px;"
           />
 
 
-        <button 
+        <button
           type="submit"
           class="btn position-absolute top-50 start-0 translate-middle-y ps-3 border-0 bg-transparent">
           <i class="fas fa-search"></i>
@@ -35,11 +47,11 @@
         <i class="fas fa-shopping-cart"></i>
       </button>
 
-      
+
       <div class="dropdown">
-        <button 
-          class="btn dropdown-toggle d-flex align-items-center" 
-          data-bs-toggle="dropdown" 
+        <button
+          class="btn dropdown-toggle d-flex align-items-center"
+          data-bs-toggle="dropdown"
           aria-expanded="false">
           <div class="text-start d-none d-md-block">
             <p *ngIf="isLoggedIn; else guestTemplate" class="mb-0 small">Hello, {{ userFirstName }}</p>
@@ -49,7 +61,7 @@
             <strong>Account & Lists</strong>
           </div>
         </button>
-      
+
         <ul class="dropdown-menu dropdown-menu-end">
             <ng-container *ngIf="isLoggedIn">
             <li>
@@ -58,7 +70,7 @@
               </a>
             </li>
             </ng-container>
-      
+
           <li>
             <a class="dropdown-item" [routerLink]="['/customer/stores']">
               <i class="fas fa-store me-2"></i>Stores
@@ -69,7 +81,7 @@
                 <i class="fas fa-shopping-cart me-2"></i> Cart
             </a>
           </li>
-      
+
           <ng-container *ngIf="isLoggedIn; else loginTemplate">
             <li>
               <a class="dropdown-item" (click)="onSignOut()">
@@ -77,7 +89,7 @@
               </a>
             </li>
           </ng-container>
-      
+
           <ng-template #loginTemplate>
             <li>
               <a class="dropdown-item" href="#">
@@ -86,7 +98,7 @@
             </li>
           </ng-template>
         </ul>
-      </div>            
+      </div>
       </div>
     </div>
 

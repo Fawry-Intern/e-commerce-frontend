@@ -5,48 +5,50 @@
 }
 
 .main-content {
-    flex: 1;
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
+  flex: 1;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  background-color: #f8fafc;
 }
 
 .admin-dashboard {
-    padding: 2rem;
-    background-color: #f8f9fa;
-    min-height: 100vh;
+  padding: 2rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
 }
 
 .dashboard-header {
-    margin-bottom: 2rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #d9e4e8, #96a8bb);
-    border-radius: 20px;
-    color: white;
-    box-shadow: 0 10px 30px rgba(33, 147, 176, 0.2);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header-content h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
 }
 
 .header-content h1 i {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .header-content p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
 }
 
 .dashboard-grid {

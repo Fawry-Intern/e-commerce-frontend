@@ -1,4 +1,3 @@
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
@@ -8,21 +7,22 @@
   flex: 1;
   margin-left: 250px;
   transition: margin-left 0.3s ease;
+  background-color: #f8fafc;
 }
 
 .admin-dashboard {
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: #f8fafc;
   min-height: 100vh;
 }
 
 .dashboard-header {
   margin-bottom: 2rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #d9e4e8, #96a8bb);
+  background: linear-gradient(135deg, #007bff, #0056b3);
   border-radius: 20px;
   color: white;
-  box-shadow: 0 10px 30px rgba(33, 147, 176, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
 }
 
 .header-content {
@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: white;
 }
 
 .header-content h1 i {
@@ -90,7 +91,7 @@
 .card-header i {
   font-size: 1.8rem;
   margin-right: 1rem;
-  background: linear-gradient(45deg, #2193b0, #6dd5ed);
+  background: linear-gradient(45deg, #007bff, #42a5f5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -98,7 +99,7 @@
 .card-header h2 {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #333333;
   margin: 0;
 }
 
@@ -136,15 +137,15 @@
 }
 
 .stat-icon.active {
-  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  background: linear-gradient(45deg, #2e7d32, #66bb6a);
 }
 
 .stat-icon.inactive {
-  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  background: linear-gradient(45deg, #d32f2f, #ef5350);
 }
 
 .stat-icon.total {
-  background: linear-gradient(45deg, #3498db, #2980b9);
+  background: linear-gradient(45deg, #1565c0, #42a5f5);
 }
 
 .stat-info {
@@ -155,7 +156,7 @@
 .stat-value {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #333333;
 }
 
 .stat-label {
@@ -181,7 +182,7 @@
 
 .activity-item:hover {
   transform: translateX(5px);
-  background: #f0f0f0;
+  background: #f0f7ff;
 }
 
 .activity-icon {
@@ -197,15 +198,15 @@
 }
 
 .activity-icon.user {
-  background: linear-gradient(45deg, #2193b0, #6dd5ed);
+  background: linear-gradient(45deg, #1565c0, #42a5f5);
 }
 
 .activity-icon.account {
-  background: linear-gradient(45deg, #ee0979, #ff6a00);
+  background: linear-gradient(45deg, #ff6d00, #ffab40);
 }
 
 .activity-icon.system {
-  background: linear-gradient(45deg, #834d9b, #d04ed6);
+  background: linear-gradient(45deg, #6a1b9a, #ab47bc);
 }
 
 .activity-content {
@@ -214,7 +215,7 @@
 
 .activity-title {
   font-weight: 500;
-  color: #2c3e50;
+  color: #333333;
   margin-bottom: 0.25rem;
 }
 
@@ -245,9 +246,9 @@
 
 .action-button:hover {
   transform: translateY(-3px);
-  background: linear-gradient(45deg, #2193b0, #6dd5ed);
+  background: linear-gradient(45deg, #007bff, #42a5f5);
   color: white;
-  box-shadow: 0 5px 15px rgba(33, 147, 176, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
 }
 
 .action-button i {
@@ -284,7 +285,7 @@
 .section-header h2 {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #333333;
   margin: 0;
 }
 
@@ -322,12 +323,12 @@
 
 .search-box input:focus {
   outline: none;
-  border-color: #2193b0;
-  box-shadow: 0 0 0 4px rgba(33, 147, 176, 0.1);
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
 }
 
 .search-box input:focus + i {
-  color: #2193b0;
+  color: #007bff;
 }
 
 /* Responsive Adjustments */
@@ -367,8 +368,11 @@
   .users-table-section {
     padding: 1.5rem;
   }
-}
 
+  .main-content {
+    margin-left: 70px;
+  }
+}
 
 .recent-activity .activity-list {
   display: flex;

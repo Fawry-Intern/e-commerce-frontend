@@ -42,15 +42,13 @@ export class CustomerStoreComponent {
     });
     
   }
-  handleSearch(searchText: string) {
-    console.log("Search text:", searchText); // Debugging line
-    
-    if (searchText) {
+  handleSearch(searchText: string): void {
+    if (!searchText) {
+      this.filteredStores = this.stores;
+    } else {
       this.filteredStores = this.stores.filter(store =>
         store.name.toLowerCase().includes(searchText.toLowerCase())
       );
-    } else {
-      this.loadStores(); 
     }
   }
 

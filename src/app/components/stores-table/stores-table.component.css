@@ -553,3 +553,226 @@ table{
   border-radius: 50%; 
  
 }
+
+/* Styles for Store Details Modal */
+.store-details-modal .modal-content {
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.store-details-header {
+  background-color: #f8f9fa; /* Light grey background */
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.store-details-header .modal-title {
+  color: #0d6efd; /* Primary blue color */
+  font-weight: bold;
+}
+
+.store-details-body {
+  padding: 2rem;
+}
+
+.store-details-body p {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.store-details-body strong {
+  color: #6c757d; /* Muted grey color */
+}
+
+.store-details-image {
+  border: 3px solid #dee2e6;
+  padding: 5px;
+  background-color: #fff;
+  margin-top: 1.5rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.store-details-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.store-details-footer .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.store-details-footer .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+/* Styles for Create Store Modal */
+.create-store-modal .modal-content {
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.create-store-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.create-store-header .modal-title {
+  color: #198754; /* Success green color */
+  font-weight: bold;
+}
+
+.create-store-body {
+  padding: 2rem;
+}
+
+.create-store-body .form-label {
+  color: #495057;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.create-store-body .form-control {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.create-store-body .form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.create-store-body textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.create-store-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.create-store-footer .btn-primary {
+  background-color: #198754;
+  border-color: #198754;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.create-store-footer .btn-primary:hover {
+  background-color: #157347;
+  border-color: #146c43;
+  transform: translateY(-1px);
+}
+
+.create-store-footer .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.create-store-footer .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+  transform: translateY(-1px);
+}
+
+/* Styles for Create Product Modal */
+.create-product-modal .modal-content {
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.create-product-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.create-product-header .modal-title {
+  color: #198754; /* Success green color */
+  font-weight: bold;
+}
+
+.create-product-body {
+  padding: 2rem;
+}
+
+.create-product-body .form-label {
+  color: #495057;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.create-product-body .form-control {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.create-product-body .form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.create-product-body textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.create-product-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.create-product-footer .btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.create-product-footer .btn-success:hover {
+  background-color: #157347;
+  border-color: #146c43;
+  transform: translateY(-1px);
+}
+
+.create-product-footer .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.create-product-footer .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+  transform: translateY(-1px);
+}
+
+/* Create Store Button Text */
+.create-store-text {
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover .create-store-text {
+  transform: translateY(-1px);
+}
+

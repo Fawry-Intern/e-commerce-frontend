@@ -8,7 +8,7 @@ table{
     table-layout: fixed; /* Makes sure the table size remains constant */
     border-collapse: collapse; /* Optional: makes borders collapse for a cleaner look */
   }
-  
+
   /* Define fixed width for each column to ensure constant size */
   .table th, .table td {
     width: 16%; /* Adjust width percentage according to your needs */
@@ -16,44 +16,44 @@ table{
     text-overflow: ellipsis; /* Truncate content with ellipsis if it's too long */
     white-space: nowrap; /* Prevent content from wrapping to the next line */
   }
-  
+
   /* Optionally, you can add specific widths for certain columns */
   .table th:nth-child(1),
   .table td:nth-child(1) {
     width: 18%; /* For first column */
   }
-  
+
   .table th:nth-child(2),
   .table td:nth-child(2) {
     width: 18%; /* For second column */
   }
-  
+
   .table th:nth-child(3),
   .table td:nth-child(3) {
     width: 18%; /* For third column */
   }
-  
+
   .table th:nth-child(4),
   .table td:nth-child(4) {
     width: 18%; /* For fourth column */
   }
-  
+
   .table th:nth-child(5),
   .table td:nth-child(5) {
     width: 18%; /* For fifth column */
   }
-  
+
   .table th:nth-child(6),
   .table td:nth-child(6) {
     width: 12%; /* For the Status column */
   }
-  
+
   /* Optional: Styling for table rows on hover */
   .table-hover tbody tr:hover {
     background-color: #007bff; /* Highlight on hover */
     color: white;
   }
-  
+
   .table td, .table th {
     word-wrap: break-word;
     white-space: normal;
@@ -278,15 +278,15 @@ table{
     min-width: 100%;
     margin-bottom: 1rem;
   }
-  
+
   .stats-summary {
     display: none;
   }
-  
+
   .table td {
     padding: 1rem;
   }
-  
+
   .contact-info {
     font-size: 0.85rem;
   }
@@ -377,17 +377,17 @@ table{
 }
 
 .stat-icon.active {
-  background: linear-gradient(45deg, #2e7d32, #4caf50);
+  background: linear-gradient(45deg, #2e7d32, #66bb6a);
   color: white;
 }
 
 .stat-icon.inactive {
-  background: linear-gradient(45deg, #c62828, #f44336);
+  background: linear-gradient(45deg, #d32f2f, #ef5350);
   color: white;
 }
 
 .stat-icon.total {
-  background: linear-gradient(45deg, #1976d2, #2196f3);
+  background: linear-gradient(45deg, #1565c0, #42a5f5);
   color: white;
 }
 

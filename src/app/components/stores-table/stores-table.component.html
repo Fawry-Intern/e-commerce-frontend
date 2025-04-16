@@ -16,7 +16,7 @@
           </div>
           <span class="badge bg-primary">{{ filteredStores.length }} Stores</span>
           <button class="btn btn-success" (click)="createStore()">
-            <i class="fas fa-plus"></i> Create New Store
+            <i class="fas fa-plus"></i> <span class="create-store-text">Create New Store</span>
           </button>
         </div>
       </div>
@@ -57,14 +57,14 @@
 
 
 
-<div class="modal fade" id="storeDetailsModal" tabindex="-1" aria-labelledby="storeDetailsLabel" aria-hidden="true">
+<div class="modal fade store-details-modal" id="storeDetailsModal" tabindex="-1" aria-labelledby="storeDetailsLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header store-details-header">
         <h5 class="modal-title" id="storeDetailsLabel">Store Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
+      <div class="modal-body text-center store-details-body">
         <div *ngIf="selectedStore">
           <p><strong>ID: </strong> {{ selectedStore.id }}</p>
           <p><strong>Name: </strong> {{ selectedStore.name }}</p>
@@ -73,13 +73,13 @@
             <img
               [src]="selectedStore.imageUrl"
               alt="{{ selectedStore.name }}"
-              class="img-fluid rounded-3 shadow-lg"
+              class="img-fluid rounded-3 shadow-lg store-details-image"
               style="max-height: 400px; object-fit: cover;"
             />
           </div>
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer store-details-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
@@ -87,15 +87,15 @@
 </div>
 
 
-<div class="modal fade" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreLabel" aria-hidden="true">
+<div class="modal fade create-store-modal" id="createStoreModal" tabindex="-1" aria-labelledby="createStoreLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header create-store-header">
         <h5 class="modal-title" id="createStoreLabel">Create New Store</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body create-store-body">
         <form>
           <div class="mb-3">
             <label for="storeName" class="form-label">Store Name</label>
@@ -112,7 +112,7 @@
         </form>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer create-store-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" (click)="addStore()" data-bs-dismiss="modal">Add Store</button>
       </div>

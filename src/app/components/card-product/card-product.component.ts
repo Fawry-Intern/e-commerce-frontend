@@ -39,4 +39,9 @@ export class CardProductComponent {
     this.cartItem.productId = this.product.id;
     this.cartItem.storeId = this.storeId;
   }
+
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/default/product.png';
+  }
 }

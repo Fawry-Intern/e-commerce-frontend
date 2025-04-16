@@ -9,5 +9,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './card-store.component.css'
 })
 export class CardStoreComponent {
-  @Input() store!: Store; 
+  @Input() store!: Store;
+
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/default/store.png';
+  }
 }

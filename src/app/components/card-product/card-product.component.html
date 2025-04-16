@@ -2,7 +2,7 @@
   <div class="single-card-wrapper">
     <div class="single-card card-style-1">
       <div class="card-image">
-        <img [src]="this.product.imageUrl" alt="{{ this.product.name }}">
+        <img [src]="this.product.imageUrl" alt="{{ this.product.name }}" (error)="onImageError($event)">
       </div>
 
       <div class="card-content">

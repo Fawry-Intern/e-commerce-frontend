@@ -1,93 +1,187 @@
-<div class="container my-5">
-  <div class="row">
-    <!-- Cart Items -->
-    <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div class="card-header text-white text-center" style="background-color: rgb(104 160 209);">
-          <h4 class="mb-0" style="color: white;">Your Cart</h4>
-        </div>
-        <div class="card-body">
-          <div *ngFor="let item of cartItems" class="d-flex align-items-center mb-4 border-bottom pb-3">
-            <img [src]="item.imageUrl" alt="Product" class="img-thumbnail me-3" style="width: 100px; height: auto;" />
-            <div>
-              <p class="mb-1 text-dark"><strong>Product ID:</strong> {{ item.productId }}</p>
-              <p class="mb-1 text-muted"><strong>Quantity:</strong> {{ item.quantity }}</p>
-              <p class="mb-1 text-success"><strong>Price:</strong> {{ item.price }} $</p>
+<div class="main-content">
+  <div class="order-container">
+    <div class="cart-wrapper">
+      <div class="cart-section">
+        <div class="card">
+          <div class="card-header">
+            <h4><i class="fas fa-shopping-cart me-2"></i>Your Cart</h4>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let item of cartItems" class="cart-item">
+              <img [src]="item.imageUrl" alt="Product" />
+              <div class="info-details">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <p><strong>Product ID:</strong> <span class="text-muted">{{ item.productId }}</span></p>
+                  <p><strong>Quantity:</strong> <span class="text-muted">{{ item.quantity }}</span></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-0"><strong>Unit Price:</strong> <span class="text-success">${{ item.price }}</span></p>
+                  <p class="mb-0"><strong>Total:</strong> <span class="text-success">${{ item.price * item.quantity }}</span></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Order Form -->
-    <div class="col-md-6">
-      <div class="card shadow-sm mt-4 mt-md-0">
-        <div class="card-header  text-center" style="background-color: rgb(104 160 209);">
-          <h4 class="mb-0"style="color: white;">Order Summary</h4>
-        </div>
-        <div class="card-body">
-          <form #customerForm="ngForm" >
-            <h5 class="mb-3 text-primary">Customer Info</h5>
-            <div class="mb-3">
-              <input type="text" name="customerName" [(ngModel)]="order.customerName" class="form-control" placeholder="Full Name" required />
-            </div>
-            <div class="mb-3">
-              <input type="text" name="customerContact" [(ngModel)]="order.customerContact" class="form-control" placeholder="Phone" required />
-            </div>
-
-            <h5 class="mb-3 text-primary">Address Details</h5>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <input type="text" name="governorate" [(ngModel)]="order.addressDetails.governorate" class="form-control" placeholder="Governorate" required />
+      <!-- Order Form -->
+      <div class="order-form-section">
+        <div class="card">
+          <div class="card-header">
+            <h4><i class="fas fa-file-invoice me-2"></i>Order Summary</h4>
+          </div>
+          <div class="card-body">
+            <form #customerForm="ngForm">
+              <h5>Customer Information</h5>
+              <div class="mb-3">
+                <label for="customerName" class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  id="customerName"
+                  name="customerName"
+                  [(ngModel)]="order.customerName"
+                  class="form-control"
+                  placeholder="Enter your full name"
+                  required
+                />
               </div>
-              <div class="col-md-6 mb-3">
-                <input type="text" name="city" [(ngModel)]="order.addressDetails.city" class="form-control" placeholder="City" required />
+              <div class="mb-3">
+                <label for="customerContact" class="form-label">Phone Number</label>
+                <input
+                  type="text"
+                  id="customerContact"
+                  name="customerContact"
+                  [(ngModel)]="order.customerContact"
+                  class="form-control"
+                  placeholder="Enter your phone number"
+                  required
+                />
               </div>
-            </div>
-            <div class="mb-3">
-              <input type="text" name="address" [(ngModel)]="order.addressDetails.address" class="form-control" placeholder="Street Address" required />
-            </div>
 
-            <h5 class="mb-3 text-primary">Payment Details</h5>
-            <div class="mb-3">
-              <input type="text" name="cardNumber" [(ngModel)]="order.paymentMethod.details.number" class="form-control" placeholder="Card Number" required />
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <input type="text" name="cvv" [(ngModel)]="order.paymentMethod.details.cvv" class="form-control" placeholder="CVV" required />
+              <h5>Shipping Address</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="governorate" class="form-label">Governorate</label>
+                  <select 
+                    id="governorate"
+                    name="governorate" 
+                    [(ngModel)]="order.addressDetails.governorate" 
+                    class="form-control" 
+                    required
+                    (change)="onGovernorateChange($event)"
+                  >
+                    <option value="">Select Governorate</option>
+                    <option *ngFor="let gov of governorates" [value]="gov.governorate_name_en">
+                      {{ gov.governorate_name_en }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <select 
+                    id="city"
+                    name="city" 
+                    [(ngModel)]="order.addressDetails.city" 
+                    class="form-control" 
+                    required
+                    [disabled]="!order.addressDetails.governorate"
+                  >
+                    <option value="">Select City</option>
+                    <option *ngFor="let city of filteredCities" [value]="city.city_name_en">
+                      {{ city.city_name_en }}
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-6 mb-3">
-                <input type="text" name="expiry" [(ngModel)]="order.paymentMethod.details.expiry" class="form-control" placeholder="Expiry (MM/YY)" required />
+              <div class="mb-3">
+                <label for="address" class="form-label">Street Address</label>
+                <input 
+                  type="text" 
+                  id="address"
+                  name="address" 
+                  [(ngModel)]="order.addressDetails.address" 
+                  class="form-control" 
+                  placeholder="Enter street address"
+                  required 
+                />
               </div>
-            </div>
 
-            <div class="mb-3">
-              <p class="fs-5"><strong>Total Price: {{ order.totalAmount }} $</strong></p>
-            </div>
+              <h5>Payment Details</h5>
+              <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <input
+                  type="text"
+                  id="cardNumber"
+                  name="cardNumber"
+                  [(ngModel)]="order.paymentMethod.details.number"
+                  class="form-control"
+                  placeholder="Enter card number"
+                  required
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="cvv" class="form-label">CVV</label>
+                  <input
+                    type="text"
+                    id="cvv"
+                    name="cvv"
+                    [(ngModel)]="order.paymentMethod.details.cvv"
+                    class="form-control"
+                    placeholder="Enter CVV"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="expiry" class="form-label">Expiry Date</label>
+                  <input
+                    type="text"
+                    id="expiry"
+                    name="expiry"
+                    [(ngModel)]="order.paymentMethod.details.expiry"
+                    class="form-control"
+                    placeholder="MM/YY"
+                    required
+                  />
+                </div>
+              </div>
 
-            <div class="mb-3">
-              <label for="coupon" class="form-label">Coupon Code:</label>
-              <input
-                type="text"
-                id="coupon"
-                class="form-control"
-                [(ngModel)]="order.couponCode"
-                name="couponCode"
-                
-                placeholder="Enter coupon"
-              />
-              <button type="submit" (click)="applyDiscount()" class="btn btn-warning" style="margin-top:10px ">
-                Try Coupon
-            </button>
-            </div>
-            
+              <div class="info-group">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p><strong>Total Price:</strong></p>
+                  <p class="fs-5">${{ order.totalAmount }}</p>
+                </div>
+              </div>
 
-            <p class="fs-5"><strong>After Discount: {{ this.order.totalAmount-this.discount }} $</strong></p>
+              <div class="mb-4">
+                <label for="coupon" class="form-label">Have a Coupon?</label>
+                <div class="d-flex gap-2">
+                  <input
+                    type="text"
+                    id="coupon"
+                    class="form-control"
+                    [(ngModel)]="order.couponCode"
+                    name="couponCode"
+                    placeholder="Enter coupon code"
+                  />
+                  <button type="button" (click)="applyDiscount()" class="btn btn-warning">
+                    Apply
+                  </button>
+                </div>
+              </div>
 
-            <button type="submit" (click)="submitOrder()" class="btn btn-primary w-100 mt-3" [disabled]="!customerForm.valid">
-              Submit Order
-            </button>
-          </form>
+              <div class="info-group">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p><strong>After Discount:</strong></p>
+                  <p class="fs-5">${{ this.order.totalAmount-this.discount }}</p>
+                </div>
+              </div>
+
+              <button type="submit" (click)="submitOrder()" class="btn btn-primary w-100" [disabled]="!customerForm.valid">
+                <i class="fas fa-check me-2"></i>Complete Order
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

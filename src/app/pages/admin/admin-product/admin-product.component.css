@@ -8,21 +8,22 @@
   flex: 1;
   margin-left: 250px;
   transition: margin-left 0.3s ease;
+  background-color: #f8fafc;
 }
 
 .admin-dashboard {
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: #f8fafc;
   min-height: 100vh;
 }
 
 .dashboard-header {
   margin-bottom: 2rem;
   padding: 2rem;
-  background: linear-gradient(135deg, #d9e4e8, #96a8bb);
+  background: linear-gradient(135deg, #007bff, #0056b3);
   border-radius: 20px;
   color: white;
-  box-shadow: 0 10px 30px rgba(33, 147, 176, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
 }
 
 .header-content {
@@ -37,6 +38,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: white;
 }
 
 .header-content h1 i {

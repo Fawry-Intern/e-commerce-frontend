@@ -62,14 +62,14 @@
 </div>
 
 
-<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel" aria-hidden="true">
+<div class="modal fade product-details-modal" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header product-details-header">
         <h5 class="modal-title" id="productDetailsLabel">Product Details</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
+      <div class="modal-body text-center product-details-body">
         <div *ngIf="selectedProduct">
           <p><strong>ID: </strong> {{ selectedProduct.id }}</p>
           <p><strong>Name: </strong> {{ selectedProduct.name }}</p>
@@ -79,13 +79,13 @@
             <img
               [src]="selectedProduct.imageUrl"
               alt="{{ selectedProduct.name }}"
-              class="img-fluid rounded-3 shadow-lg"
+              class="img-fluid rounded-3 shadow-lg product-details-image"
               style="max-height: 400px; object-fit: cover;"
             />
           </div>
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer product-details-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
@@ -94,15 +94,15 @@
 
 
 <!-- Create Product Modal -->
-<div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
+<div class="modal fade create-product-modal" id="createProductModal" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header create-product-header">
         <h5 class="modal-title" id="createProductLabel">Create New Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body create-product-body">
         <form>
           <div class="mb-3">
             <label for="productName" class="form-label">Product Name</label>
@@ -123,24 +123,24 @@
         </form>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer create-product-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">Add Product</button>
+        <button type="button" class="btn btn-success" (click)="addProduct()" data-bs-dismiss="modal">Add Product</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Edit Product Modal -->
-<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
+<div class="modal fade edit-product-modal" id="editProductModal" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header edit-product-header">
         <h5 class="modal-title" id="editProductLabel">Edit Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body edit-product-body">
         <form>
           <div class="mb-3">
             <label for="editProductName" class="form-label">Product Name</label>
@@ -161,7 +161,7 @@
         </form>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer edit-product-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-warning" (click)="editProduct(selectedProduct)" data-bs-dismiss="modal">Save Changes</button>
       </div>
