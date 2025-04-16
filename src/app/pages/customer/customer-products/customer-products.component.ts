@@ -1,16 +1,16 @@
 import { Component } from "@angular/core";
 import { CardProductComponent } from "../../../components/card-product/card-product.component";
+import { CustomerNavebareComponent } from "../../../components/customer-navebare/customer-navebare.component";
+import { CustomerSidebarComponent } from "../../../components/customer-sidebar/customer-sidebar.component";
+import { CustomerProductNavbarComponent } from "../../../components/customer-product-navbar/customer-product-navbar.component";
 import { CommonModule } from "@angular/common";
 import { Product } from "../../../models/product/product.model";
 import { StoreService } from "../../../services/store.service";
 import { ActivatedRoute } from "@angular/router";
-import { CustomerNavebareComponent } from "../../../components/customer-navebare/customer-navebare.component";
-import { FormsModule } from "@angular/forms";
-import { CustomerProductNavbarComponent } from "../../../components/customer-product-navbar/customer-product-navbar.component";
 
 @Component({
   selector: 'app-customer-products',
-  imports: [CommonModule, CardProductComponent, CustomerNavebareComponent, FormsModule, CustomerProductNavbarComponent],
+  imports: [CommonModule,CustomerProductNavbarComponent, CardProductComponent],
   templateUrl: './customer-products.component.html',
   styleUrls: ['./customer-products.component.css'],
 })
@@ -36,7 +36,7 @@ export class CustomerProductsComponent {
       if (idParam) {
         this.storeId = +idParam;
         console.log(this.storeId);
-
+        
         this.loadProducts();
       }
     });
@@ -45,7 +45,7 @@ export class CustomerProductsComponent {
   loadProducts(): void {
     if (this.isLoading) return;
     console.log(this.currentPage + 1 >= this.totalPages);
-
+    
     this.isLoading = true;
     this.currentPage++;
 
@@ -64,10 +64,10 @@ export class CustomerProductsComponent {
       }
     });
     console.log(this.filterProducts);
-
-
+    
+    
   }
-  handleAppendedProductsToFilteredProducts(newProducts: Product[][]) {
+  handleAppendedProductsToFilteredProducts(newProducts: Product[]) {
     if (this.searchQuery) {
       const newFilteredProducts = newProducts.flat().filter(product =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -98,6 +98,6 @@ export class CustomerProductsComponent {
   }
 
   trackByFn(index: number, item: Product) {
-    return item.id;
+    return item.id; 
   }
 }
