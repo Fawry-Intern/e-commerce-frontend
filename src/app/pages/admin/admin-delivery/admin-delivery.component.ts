@@ -36,13 +36,13 @@ export class AdminDeliveryComponent implements OnInit {
   pageSize = 10;
 
   workDaysMap = new Map<number, string>([
-    [0, 'Sunday'],
     [1, 'Monday'],
     [2, 'Tuesday'],
     [3, 'Wednesday'],
     [4, 'Thursday'],
     [5, 'Friday'],
-    [6, 'Saturday']
+    [6, 'Saturday'],
+    [7, 'Sunday']
   ]);
 
   workDaysArray = Array.from(this.workDaysMap.entries());
