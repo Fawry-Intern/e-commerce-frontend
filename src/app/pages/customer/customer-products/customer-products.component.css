@@ -21,6 +21,30 @@
     border-radius: 8px;
     background-color: #fff;
   }
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .product-column {
+    flex: 0 1 calc(25% - 1rem); /* Adjust to control how many products per row */
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 768px) {
+    .product-column {
+      flex: 0 1 calc(50% - 1rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-column {
+      flex: 0 1 100%;
+    }
+  }
+  
   
  
   .ul {

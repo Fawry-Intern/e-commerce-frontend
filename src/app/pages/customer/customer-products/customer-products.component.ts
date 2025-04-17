@@ -78,12 +78,6 @@ export class CustomerProductsComponent {
     }
   }
 
-  onScroll(event: any): void {
-    const element = event.target;
-    if (event.deltaY > 0 && element.scrollHeight - element.scrollTop <= element.clientHeight + 100) {
-      this.loadProducts();
-    }
-  }
 
   handleSearch(searchText: string): void {
     this.searchQuery = searchText;
